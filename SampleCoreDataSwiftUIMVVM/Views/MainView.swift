@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainView: View {
-    @ObservedObject var viewModel = MainViewModel()
+    @ObservedObject var viewModel: MainViewModel
 
     var body: some View {
         NavigationView {
@@ -30,7 +30,7 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        var view = MainView()
+        var view = MainView(viewModel: MainViewModel())
         view.viewModel = MainViewModel(dataManager: MockDataManager())
         return view
     }

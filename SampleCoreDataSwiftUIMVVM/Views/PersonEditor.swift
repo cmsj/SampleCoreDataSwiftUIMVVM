@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PersonEditor: View {
-    @ObservedObject var viewModel = PersonEditorViewModel()
+    @ObservedObject var viewModel: PersonEditorViewModel
     @State var person: Person
     @State var updateTrigger = 1 // This is an ugly hack
 
