@@ -13,7 +13,7 @@ struct peopleListView: View {
     var body: some View {
         Section(header: Text("People"), footer: Text("Swipe to delete")) {
             ForEach(viewModel.people) { person in
-                NavigationLink(destination: PersonEditor(viewModel: PersonEditorViewModel(), person: person), label: {
+                NavigationLink(destination: PersonEditor(person: person), label: {
                     HStack {
                         Text(person.name)
                         Spacer()

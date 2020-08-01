@@ -8,20 +8,22 @@
 import SwiftUI
 
 struct CheckmarkTextRow: View {
-    @State var person: Person
+    @ObservedObject var viewModel: PersonEditorViewModel
 
     var title: String
     var index: Int
     var isSelected: Bool {
-        person.daysAllowed.contains(index)
+        // This (and the ones below) feel like we're reaching too deep.
+        // PersonEditorViewModel should probably abstract this somewhat
+        viewModel.person.daysAllowed.contains(index)
     }
 
     var body: some View {
         Button(action: {
-            if person.daysAllowed.contains(index) {
-                person.daysAllowed.remove(index)
+            if viewModel.person.daysAllowed.contains(index) {
+                viewModel.person.daysAllowed.remove(index)
             } else {
-                person.daysAllowed.insert(index)
+                viewModel.person.daysAllowed.insert(index)
             }
         }) {
             HStack {
@@ -37,18 +39,16 @@ struct CheckmarkTextRow: View {
 
 struct DayPicker: View {
     @ObservedObject var viewModel: PersonEditorViewModel
-    @State var person: Person
-
-    @State var trigger = 1 // This is a hack
 
     let calendar = Calendar.current
 
     var body: some View {
         List(0 ..< 7) { index in
-            CheckmarkTextRow(person: person, title: calendar.weekdaySymbols[index], index: index)
+            CheckmarkTextRow(viewModel: viewModel, title: calendar.weekdaySymbols[index], index: index)
         }
         .listStyle(InsetGroupedListStyle())
-        .navigationTitle("Days")    }
+        .navigationTitle("Days")
+    }
 }
 
 /*

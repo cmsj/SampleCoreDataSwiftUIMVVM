@@ -9,26 +9,10 @@ import SwiftUI
 
 struct PersonEditor: View {
     @ObservedObject var viewModel: PersonEditorViewModel
-    @State var person: Person
-    @State var updateTrigger = 1 // This is an ugly hack
 
-    var name: Binding<String> { Binding(
-        get: { person.name },
-        set: {
-            person.name = $0
-            viewModel.updatePerson(person: person)
-            updateTrigger += 1
-        }
-    )}
-
-    var reason: Binding<VisitReason> { Binding(
-        get: { person.reason },
-        set: {
-            person.reason = $0
-            viewModel.updatePerson(person: person)
-            updateTrigger += 1
-        }
-    )}
+    init(person: Person) {
+        viewModel = PersonEditorViewModel(personID: person.id)
+    }
 
     var body: some View {
         List {
@@ -36,26 +20,26 @@ struct PersonEditor: View {
                 HStack {
                     Text("Name")
                     Spacer()
-                    TextField("", text: name)
+                    TextField("", text: $viewModel.person.name)
                 }
-                Picker(selection: reason, label: Text("Visit reason")) {
+                Picker(selection: $viewModel.person.reason, label: Text("Visit reason")) {
                     ForEach(VisitReason.allCases) { v in
                         Text(v.rawValue)
                     }
                 }
             }
             Section(header: Text("Days")) {
-                NavigationLink(destination: DayPicker(viewModel: viewModel, person: person), label: {
+                NavigationLink(destination: DayPicker(viewModel: viewModel), label: {
                     Text("Days")
                     Spacer()
-                    Text(person.daySummary)
+                    Text(viewModel.person.daySummary)
                         .font(.footnote)
                         .foregroundColor(Color.gray)
                         .multilineTextAlignment(.trailing)
                 })
             }
             Section() {
-                DeletePersonButtonView(viewModel: viewModel, person: person)
+                DeletePersonButtonView(viewModel: viewModel)
             }
         }
         .listStyle(InsetGroupedListStyle())

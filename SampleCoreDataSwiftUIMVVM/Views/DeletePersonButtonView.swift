@@ -9,9 +9,7 @@ import SwiftUI
 
 struct DeletePersonButtonView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-
-    var viewModel: PersonEditorViewModel
-    @State var person: Person
+    @ObservedObject var viewModel: PersonEditorViewModel
     @State private var showingDeleteAlert = false
 
     var body: some View {
@@ -27,7 +25,8 @@ struct DeletePersonButtonView: View {
             }.actionSheet(isPresented: $showingDeleteAlert) {
                 ActionSheet(title: Text("Are you sure?"), message: Text("This person will be removed"), buttons: [
                     .destructive(Text("Delete")) {
-                        viewModel.deletePerson(person: person)
+                        // FIXME: Why are we telling our view model to delete the (only) person it owns? This is a smell
+                        viewModel.deletePerson(person: viewModel.person)
                         // Taken from: https://stackoverflow.com/a/57279591/2305249
                         self.presentationMode.wrappedValue.dismiss()
                     },

@@ -15,11 +15,11 @@ var mockNormalPeople = [
     Person(id: UUID(), ceo: false, name: "Dr. Gonersly", reason: .SummerVacation, daysAllowed: Set(1..<6))
 ]
 
-class MockDataManager {
+class MockDataManager: DataManagerBase {
     private var ceo: Person
     private var normalPeople: [Person]
 
-    init() {
+    override init() {
         ceo = mockCEO
         normalPeople = mockNormalPeople
     }
@@ -28,39 +28,37 @@ class MockDataManager {
         ceo = mockCEO
         normalPeople = mockNormalPeople
     }
-}
 
-extension MockDataManager: DataManagerProtocol {
-    func fetchCEO() -> Person {
+    override func fetchCEO() -> Person {
         return ceo
     }
 
-    func fetchPeople() -> [Person] {
+    override func fetchPeople() -> [Person] {
         return normalPeople
     }
 
-    func addPerson(name: String, ceo: Bool, visitReason: VisitReason, days: Set<Int>) {
+    override func addPerson(name: String, ceo: Bool, visitReason: VisitReason, days: Set<Int>) {
         normalPeople.append(Person(id: UUID(), ceo: ceo, name: name, reason: visitReason, daysAllowed: days))
     }
 
-    func deletePerson(person: Person) {
+    override func deletePerson(person: Person) {
         let index = normalPeople.firstIndex(of: person)
         normalPeople.remove(at: index!)
     }
 
-    func updatePerson(person: Person) {
+    override func updatePerson(person: Person) {
         return
     }
 
-    func deleteAll() {
+    override func deleteAll() {
         normalPeople = []
     }
 
-    func restoreDefaults() {
+    override func restoreDefaults() {
         populate()
     }
 
-    func defaultsIfInvalid() {
+    override func defaultsIfInvalid() {
         return
     }
 }

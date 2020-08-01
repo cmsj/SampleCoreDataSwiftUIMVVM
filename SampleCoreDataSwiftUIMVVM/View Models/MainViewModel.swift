@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 protocol MainViewModelProtocol {
     var ceo: Person { get }
@@ -24,11 +25,17 @@ class MainViewModel: ObservableObject {
     @Published var ceo = Person()
     @Published var people = [Person]()
 
-    var dataManager: DataManagerProtocol
+    @ObservedObject var dataManager: DataManagerBase
+    private var dataManagerSubscriber: AnyCancellable? = nil
 
-    init(dataManager: DataManagerProtocol = DataManager.shared) {
+    init(dataManager: DataManagerBase = DataManager.shared) {
         self.dataManager = dataManager
         fetchAllPeople()
+        self.dataManagerSubscriber = dataManager.objectWillChange
+            .sink {
+            print("dataManager changed, reloading MainViewModel data")
+            self.fetchAllPeople()
+        }
     }
 }
 

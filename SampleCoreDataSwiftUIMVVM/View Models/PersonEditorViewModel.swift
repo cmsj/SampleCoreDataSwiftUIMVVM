@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 protocol PersonEditorViewModelProtocol {
     func updatePerson(person: Person)
@@ -14,10 +15,21 @@ protocol PersonEditorViewModelProtocol {
 }
 
 class PersonEditorViewModel: ObservableObject {
-    var dataManager: DataManagerProtocol
+    @Published var person: Person
+    @ObservedObject var dataManager: DataManagerBase
 
-    init(dataManager: DataManagerProtocol = DataManager.shared) {
+    private var selfSubscriber: AnyCancellable? = nil
+
+    init(personID: UUID, dataManager: DataManagerBase = DataManager.shared) {
         self.dataManager = dataManager
+        self.person = dataManager.fetchPerson(personID: personID)
+
+        selfSubscriber = objectWillChange.sink {
+            print("PersonEditorViewModel changed")
+            DispatchQueue.main.async {
+                self.dataManager.updatePerson(person: self.person)
+            }
+        }
     }
 }
 
