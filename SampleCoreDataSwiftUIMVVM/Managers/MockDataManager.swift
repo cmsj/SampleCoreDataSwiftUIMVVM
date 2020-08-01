@@ -38,19 +38,23 @@ class MockDataManager: DataManagerBase {
     }
 
     override func addPerson(name: String, ceo: Bool, visitReason: VisitReason, days: Set<Int>) {
+        self.objectWillChange.send()
         normalPeople.append(Person(id: UUID(), ceo: ceo, name: name, reason: visitReason, daysAllowed: days))
     }
 
     override func deletePerson(person: Person) {
         let index = normalPeople.firstIndex(of: person)
+        self.objectWillChange.send()
         normalPeople.remove(at: index!)
     }
 
     override func updatePerson(person: Person) {
+        self.objectWillChange.send()
         return
     }
 
     override func deleteAll() {
+        self.objectWillChange.send()
         normalPeople = []
     }
 
