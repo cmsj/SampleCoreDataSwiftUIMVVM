@@ -36,10 +36,14 @@ struct DeletePersonButtonView: View {
         }    }
 }
 
-/*
 struct DeletePersonButtonView_Previews: PreviewProvider {
+    static let dataManager = MockDataManager()
+    static let people = dataManager.fetchPeople()
+
     static var previews: some View {
-        DeletePersonButtonView()
+        List() {
+            DeletePersonButtonView(viewModel: PersonEditorViewModel(personID: people.first!.id, dataManager: dataManager))
+        }
+        .listStyle(InsetGroupedListStyle())
     }
 }
-*/

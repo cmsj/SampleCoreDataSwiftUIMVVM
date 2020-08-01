@@ -10,8 +10,8 @@ import SwiftUI
 struct PersonEditor: View {
     @ObservedObject var viewModel: PersonEditorViewModel
 
-    init(person: Person) {
-        viewModel = PersonEditorViewModel(personID: person.id)
+    init(person: Person, dataManager: DataManagerBase) {
+        viewModel = PersonEditorViewModel(personID: person.id, dataManager: dataManager)
     }
 
     var body: some View {
@@ -47,10 +47,11 @@ struct PersonEditor: View {
     }
 }
 
-/*
- struct PersonEditor_Previews: PreviewProvider {
- static var previews: some View {
- PersonEditor()
- }
- }
- */
+struct PersonEditor_Previews: PreviewProvider {
+    static let dataManager = MockDataManager()
+    static let people = dataManager.fetchPeople()
+
+    static var previews: some View {
+        PersonEditor(person: people.first!, dataManager: dataManager)
+    }
+}

@@ -37,6 +37,15 @@ class MockDataManager: DataManagerBase {
         return normalPeople
     }
 
+    override func fetchPerson(personID: UUID) -> Person {
+        for person in mockNormalPeople {
+            if person.id == personID {
+                return person
+            }
+        }
+        return Person()
+    }
+
     override func addPerson(name: String, ceo: Bool, visitReason: VisitReason, days: Set<Int>) {
         self.objectWillChange.send()
         normalPeople.append(Person(id: UUID(), ceo: ceo, name: name, reason: visitReason, daysAllowed: days))
