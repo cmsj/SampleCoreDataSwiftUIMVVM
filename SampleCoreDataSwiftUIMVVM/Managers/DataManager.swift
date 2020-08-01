@@ -123,13 +123,13 @@ class DataManager: DataManagerBase {
         newPerson.reason = visitReason.rawValue
         newPerson.days = days
 
-        dbHelper.create(newPerson)
         self.objectWillChange.send()
+        dbHelper.create(newPerson)
     }
 
     override func deletePerson(person: Person) {
-        dbHelper.delete(getPersonMO(for: person) ?? nil)
         self.objectWillChange.send()
+        dbHelper.delete(getPersonMO(for: person) ?? nil)
     }
 
     override func updatePerson(person: Person) {
@@ -145,13 +145,13 @@ class DataManager: DataManagerBase {
         personMO!.reason = person.reason.rawValue
         personMO!.days = person.daysAllowed
 
-        dbHelper.update(personMO)
         self.objectWillChange.send()
+        dbHelper.update(personMO)
     }
 
     override func deleteAll() {
-        dbHelper.deleteAll(PersonMO.self)
         self.objectWillChange.send()
+        dbHelper.deleteAll(PersonMO.self)
     }
 
     override func restoreDefaults() {
