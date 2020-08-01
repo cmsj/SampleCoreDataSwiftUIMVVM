@@ -10,8 +10,8 @@ import Combine
 import SwiftUI
 
 protocol PersonEditorViewModelProtocol {
-    func updatePerson(person: Person)
-    func deletePerson(person: Person)
+    func updatePerson()
+    func deletePerson()
 }
 
 class PersonEditorViewModel: ObservableObject {
@@ -34,11 +34,11 @@ class PersonEditorViewModel: ObservableObject {
 }
 
 extension PersonEditorViewModel: PersonEditorViewModelProtocol {
-    func updatePerson(person: Person) {
-        dataManager.updatePerson(person: person)
+    func updatePerson() {
+        dataManager.updatePerson(person: self.person)
     }
 
-    func deletePerson(person: Person) {
-        dataManager.deletePerson(person: person)
+    func deletePerson() {
+        dataManager.deletePerson(person: self.person)
     }
 }

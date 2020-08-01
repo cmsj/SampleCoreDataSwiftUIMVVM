@@ -26,7 +26,7 @@ struct DeletePersonButtonView: View {
                 ActionSheet(title: Text("Are you sure?"), message: Text("This person will be removed"), buttons: [
                     .destructive(Text("Delete")) {
                         // FIXME: Why are we telling our view model to delete the (only) person it owns? This is a smell
-                        viewModel.deletePerson(person: viewModel.person)
+                        viewModel.deletePerson()
                         // Taken from: https://stackoverflow.com/a/57279591/2305249
                         self.presentationMode.wrappedValue.dismiss()
                     },
