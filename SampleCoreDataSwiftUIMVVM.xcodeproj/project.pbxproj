@@ -10,6 +10,7 @@
 		4F27AD0324D4C8EA005295D8 /* PersonEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F27AD0224D4C8EA005295D8 /* PersonEditorViewModel.swift */; };
 		4F27AD0524D4CBBD005295D8 /* DeletePersonButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F27AD0424D4CBBD005295D8 /* DeletePersonButtonView.swift */; };
 		4F27AD0724D4CC16005295D8 /* DayPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F27AD0624D4CC16005295D8 /* DayPicker.swift */; };
+		4FB2EC7F24D59FFC005DE49E /* DataManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB2EC7E24D59FFC005DE49E /* DataManagerProtocol.swift */; };
 		4FC6C7A724D49717004AD156 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6C7A624D49717004AD156 /* AppDelegate.swift */; };
 		4FC6C7A924D49717004AD156 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6C7A824D49717004AD156 /* SceneDelegate.swift */; };
 		4FC6C7AC24D49717004AD156 /* SampleCoreDataSwiftUIMVVM.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6C7AA24D49717004AD156 /* SampleCoreDataSwiftUIMVVM.xcdatamodeld */; };
@@ -35,6 +36,7 @@
 		4F27AD0224D4C8EA005295D8 /* PersonEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonEditorViewModel.swift; sourceTree = "<group>"; };
 		4F27AD0424D4CBBD005295D8 /* DeletePersonButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletePersonButtonView.swift; sourceTree = "<group>"; };
 		4F27AD0624D4CC16005295D8 /* DayPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayPicker.swift; sourceTree = "<group>"; };
+		4FB2EC7E24D59FFC005DE49E /* DataManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerProtocol.swift; sourceTree = "<group>"; };
 		4FC6C7A324D49717004AD156 /* SampleCoreDataSwiftUIMVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleCoreDataSwiftUIMVVM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FC6C7A624D49717004AD156 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4FC6C7A824D49717004AD156 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 		4FC6C7D024D4B35A004AD156 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				4FB2EC7E24D59FFC005DE49E /* DataManagerProtocol.swift */,
 				4FC6C7CC24D49C6A004AD156 /* DataManager.swift */,
 				4FC6C7D124D4B373004AD156 /* MockDataManager.swift */,
 			);
@@ -260,6 +263,7 @@
 				4FC6C7AE24D49717004AD156 /* MainView.swift in Sources */,
 				4FC6C7AC24D49717004AD156 /* SampleCoreDataSwiftUIMVVM.xcdatamodeld in Sources */,
 				4FC6C7CF24D4B142004AD156 /* MainViewModel.swift in Sources */,
+				4FB2EC7F24D59FFC005DE49E /* DataManagerProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
