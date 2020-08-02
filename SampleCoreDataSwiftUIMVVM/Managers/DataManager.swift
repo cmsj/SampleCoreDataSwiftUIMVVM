@@ -74,8 +74,8 @@ class DataManager: DataManagerBase {
     }
 
     override func deletePerson(person: Person) {
-        self.objectWillChange.send()
         dbHelper.delete(getPersonMO(for: person) ?? nil)
+        self.objectWillChange.send()
     }
 
     override func updatePerson(person: Person) {
