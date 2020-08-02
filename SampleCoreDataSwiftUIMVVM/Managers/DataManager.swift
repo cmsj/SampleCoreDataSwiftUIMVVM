@@ -13,10 +13,10 @@ class DataManager: DataManagerBase {
     static let shared = DataManager()
     var dbHelper: CoreDataHelper = CoreDataHelper.shared
 
-    func getPersonMO(for event: Person) -> PersonMO? {
+    func getPersonMO(for person: Person) -> PersonMO? {
         let predicate = NSPredicate(
             format: "uuid = %@",
-            event.id as CVarArg)
+            person.id as CVarArg)
         let result = dbHelper.fetchFirst(PersonMO.self, predicate: predicate)
         switch result {
         case .success(let personMO):
