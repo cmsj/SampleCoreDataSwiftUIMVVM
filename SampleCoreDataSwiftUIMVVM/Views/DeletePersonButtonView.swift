@@ -25,10 +25,13 @@ struct DeletePersonButtonView: View {
             }.actionSheet(isPresented: $showingDeleteAlert) {
                 ActionSheet(title: Text("Are you sure?"), message: Text("This person will be removed"), buttons: [
                     .destructive(Text("Delete")) {
-                        viewModel.deletePerson()
-
                         // Taken from: https://stackoverflow.com/a/57279591/2305249
                         self.presentationMode.wrappedValue.dismiss()
+
+                        // The 0.3 here is a completely magic number that tries to make sure we get back to the main list view right before the delete takes effect and the person animates out of the list.
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+                            viewModel.deletePerson()
+                        })
                     },
                     .cancel()
                 ])
