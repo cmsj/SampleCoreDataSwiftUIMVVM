@@ -20,6 +20,7 @@ struct MainView: View {
                 ResetToDefaultsView(viewModel: viewModel)
             }
             .listStyle(InsetGroupedListStyle())
+            .animation(.default)
             .navigationTitle("Peoplr")
         }
         .onAppear {
