@@ -51,11 +51,10 @@ class DataManager: DataManagerBase {
 
     override func fetchPerson(personID: UUID) -> Person {
         let predicate = NSPredicate(format: "uuid == %@", personID as CVarArg)
-        let result: Result<[PersonMO], Error> = dbHelper.fetch(PersonMO.self, predicate: predicate)
+        let result: Result<PersonMO?, Error> = dbHelper.fetchFirst(PersonMO.self, predicate: predicate)
         switch result {
-        case .success(let peopleMOs):
-            let person = peopleMOs.first!
-            return person.convertToPerson()
+        case .success(let personMO):
+            return personMO!.convertToPerson()
         case .failure(let error):
             fatalError(error.localizedDescription)
         }
