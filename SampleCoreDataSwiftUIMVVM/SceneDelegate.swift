@@ -22,6 +22,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let context = CoreDataHelper.shared.context
         DataManager.shared.defaultsIfInvalid()
 
+        if ProcessInfo.processInfo.arguments.contains("UI-TESTING") {
+            DataManager.shared.restoreDefaults()
+        }
+
         // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
         // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
         let contentView = MainView(viewModel: MainViewModel()).environment(\.managedObjectContext, context)
