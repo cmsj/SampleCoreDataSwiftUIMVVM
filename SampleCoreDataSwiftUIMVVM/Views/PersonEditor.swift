@@ -10,8 +10,8 @@ import SwiftUI
 struct PersonEditor: View {
     @ObservedObject var viewModel: PersonEditorViewModel
 
-    init(person: Person, dataManager: DataManagerBase) {
-        viewModel = PersonEditorViewModel(personID: person.id, dataManager: dataManager)
+    init(personID: UUID, dataManager: DataManagerBase) {
+        viewModel = PersonEditorViewModel(personID: personID, dataManager: dataManager)
     }
 
     var body: some View {
@@ -52,6 +52,6 @@ struct PersonEditor_Previews: PreviewProvider {
     static let people = dataManager.fetchPeople()
 
     static var previews: some View {
-        PersonEditor(person: people.first!, dataManager: dataManager)
+        PersonEditor(personID: people.first!.id, dataManager: dataManager)
     }
 }
