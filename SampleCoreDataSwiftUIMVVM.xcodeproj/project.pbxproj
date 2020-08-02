@@ -10,6 +10,7 @@
 		4F27AD0324D4C8EA005295D8 /* PersonEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F27AD0224D4C8EA005295D8 /* PersonEditorViewModel.swift */; };
 		4F27AD0524D4CBBD005295D8 /* DeletePersonButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F27AD0424D4CBBD005295D8 /* DeletePersonButtonView.swift */; };
 		4F27AD0724D4CC16005295D8 /* DayPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F27AD0624D4CC16005295D8 /* DayPicker.swift */; };
+		4F39A96B24D7211100D69F5A /* SampleCoreDataSwiftUIMVVMUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F39A96A24D7211100D69F5A /* SampleCoreDataSwiftUIMVVMUITests.swift */; };
 		4FB2EC7F24D59FFC005DE49E /* DataManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB2EC7E24D59FFC005DE49E /* DataManagerProtocol.swift */; };
 		4FC6C7A724D49717004AD156 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6C7A624D49717004AD156 /* AppDelegate.swift */; };
 		4FC6C7A924D49717004AD156 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6C7A824D49717004AD156 /* SceneDelegate.swift */; };
@@ -32,10 +33,23 @@
 		4FC6C7DA24D4BC69004AD156 /* PersonEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6C7D924D4BC69004AD156 /* PersonEditor.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		4F39A96D24D7211100D69F5A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4FC6C79B24D49717004AD156 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4FC6C7A224D49717004AD156;
+			remoteInfo = SampleCoreDataSwiftUIMVVM;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		4F27AD0224D4C8EA005295D8 /* PersonEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonEditorViewModel.swift; sourceTree = "<group>"; };
 		4F27AD0424D4CBBD005295D8 /* DeletePersonButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletePersonButtonView.swift; sourceTree = "<group>"; };
 		4F27AD0624D4CC16005295D8 /* DayPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayPicker.swift; sourceTree = "<group>"; };
+		4F39A96824D7211100D69F5A /* SampleCoreDataSwiftUIMVVMUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SampleCoreDataSwiftUIMVVMUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F39A96A24D7211100D69F5A /* SampleCoreDataSwiftUIMVVMUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleCoreDataSwiftUIMVVMUITests.swift; sourceTree = "<group>"; };
+		4F39A96C24D7211100D69F5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4FB2EC7E24D59FFC005DE49E /* DataManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerProtocol.swift; sourceTree = "<group>"; };
 		4FC6C7A324D49717004AD156 /* SampleCoreDataSwiftUIMVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleCoreDataSwiftUIMVVM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FC6C7A624D49717004AD156 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +75,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		4F39A96524D7211100D69F5A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4FC6C7A024D49717004AD156 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -71,10 +92,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F39A96924D7211100D69F5A /* SampleCoreDataSwiftUIMVVMUITests */ = {
+			isa = PBXGroup;
+			children = (
+				4F39A96A24D7211100D69F5A /* SampleCoreDataSwiftUIMVVMUITests.swift */,
+				4F39A96C24D7211100D69F5A /* Info.plist */,
+			);
+			path = SampleCoreDataSwiftUIMVVMUITests;
+			sourceTree = "<group>";
+		};
 		4FC6C79A24D49717004AD156 = {
 			isa = PBXGroup;
 			children = (
 				4FC6C7A524D49717004AD156 /* SampleCoreDataSwiftUIMVVM */,
+				4F39A96924D7211100D69F5A /* SampleCoreDataSwiftUIMVVMUITests */,
 				4FC6C7A424D49717004AD156 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -83,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				4FC6C7A324D49717004AD156 /* SampleCoreDataSwiftUIMVVM.app */,
+				4F39A96824D7211100D69F5A /* SampleCoreDataSwiftUIMVVMUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -177,6 +209,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		4F39A96724D7211100D69F5A /* SampleCoreDataSwiftUIMVVMUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4F39A97124D7211100D69F5A /* Build configuration list for PBXNativeTarget "SampleCoreDataSwiftUIMVVMUITests" */;
+			buildPhases = (
+				4F39A96424D7211100D69F5A /* Sources */,
+				4F39A96524D7211100D69F5A /* Frameworks */,
+				4F39A96624D7211100D69F5A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4F39A96E24D7211100D69F5A /* PBXTargetDependency */,
+			);
+			name = SampleCoreDataSwiftUIMVVMUITests;
+			productName = SampleCoreDataSwiftUIMVVMUITests;
+			productReference = 4F39A96824D7211100D69F5A /* SampleCoreDataSwiftUIMVVMUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		4FC6C7A224D49717004AD156 /* SampleCoreDataSwiftUIMVVM */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4FC6C7BA24D49719004AD156 /* Build configuration list for PBXNativeTarget "SampleCoreDataSwiftUIMVVM" */;
@@ -203,6 +253,10 @@
 				LastSwiftUpdateCheck = 1200;
 				LastUpgradeCheck = 1200;
 				TargetAttributes = {
+					4F39A96724D7211100D69F5A = {
+						CreatedOnToolsVersion = 12.0;
+						TestTargetID = 4FC6C7A224D49717004AD156;
+					};
 					4FC6C7A224D49717004AD156 = {
 						CreatedOnToolsVersion = 12.0;
 					};
@@ -222,11 +276,19 @@
 			projectRoot = "";
 			targets = (
 				4FC6C7A224D49717004AD156 /* SampleCoreDataSwiftUIMVVM */,
+				4F39A96724D7211100D69F5A /* SampleCoreDataSwiftUIMVVMUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		4F39A96624D7211100D69F5A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4FC6C7A124D49717004AD156 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -240,6 +302,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		4F39A96424D7211100D69F5A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F39A96B24D7211100D69F5A /* SampleCoreDataSwiftUIMVVMUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4FC6C79F24D49717004AD156 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -269,6 +339,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		4F39A96E24D7211100D69F5A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4FC6C7A224D49717004AD156 /* SampleCoreDataSwiftUIMVVM */;
+			targetProxy = 4F39A96D24D7211100D69F5A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		4FC6C7B424D49719004AD156 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -281,6 +359,44 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		4F39A96F24D7211100D69F5A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VQCYSNZB89;
+				INFOPLIST_FILE = SampleCoreDataSwiftUIMVVMUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = net.tenshu.SampleCoreDataSwiftUIMVVMUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SampleCoreDataSwiftUIMVVM;
+			};
+			name = Debug;
+		};
+		4F39A97024D7211100D69F5A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VQCYSNZB89;
+				INFOPLIST_FILE = SampleCoreDataSwiftUIMVVMUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = net.tenshu.SampleCoreDataSwiftUIMVVMUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SampleCoreDataSwiftUIMVVM;
+			};
+			name = Release;
+		};
 		4FC6C7B824D49719004AD156 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -442,6 +558,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4F39A97124D7211100D69F5A /* Build configuration list for PBXNativeTarget "SampleCoreDataSwiftUIMVVMUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4F39A96F24D7211100D69F5A /* Debug */,
+				4F39A97024D7211100D69F5A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		4FC6C79E24D49717004AD156 /* Build configuration list for PBXProject "SampleCoreDataSwiftUIMVVM" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
