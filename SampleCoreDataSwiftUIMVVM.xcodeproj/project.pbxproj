@@ -31,6 +31,7 @@
 		4FC6C7D624D4B9DA004AD156 /* peopleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6C7D524D4B9DA004AD156 /* peopleListView.swift */; };
 		4FC6C7D824D4BA1C004AD156 /* ResetToDefaultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6C7D724D4BA1C004AD156 /* ResetToDefaultsView.swift */; };
 		4FC6C7DA24D4BC69004AD156 /* PersonEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6C7D924D4BC69004AD156 /* PersonEditor.swift */; };
+		4FF5300524D76E4800F4F9AC /* NavigationLazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF5300424D76E4800F4F9AC /* NavigationLazyView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		4FC6C7D524D4B9DA004AD156 /* peopleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = peopleListView.swift; sourceTree = "<group>"; };
 		4FC6C7D724D4BA1C004AD156 /* ResetToDefaultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetToDefaultsView.swift; sourceTree = "<group>"; };
 		4FC6C7D924D4BC69004AD156 /* PersonEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonEditor.swift; sourceTree = "<group>"; };
+		4FF5300424D76E4800F4F9AC /* NavigationLazyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLazyView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				4FC6C7CA24D49C40004AD156 /* NSManagedObjectContext+executeAndMerge.swift */,
+				4FF5300424D76E4800F4F9AC /* NavigationLazyView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				4FC6C7D424D4B9CD004AD156 /* CEOView.swift in Sources */,
 				4FC6C7D624D4B9DA004AD156 /* peopleListView.swift in Sources */,
 				4FC6C7DA24D4BC69004AD156 /* PersonEditor.swift in Sources */,
+				4FF5300524D76E4800F4F9AC /* NavigationLazyView.swift in Sources */,
 				4FC6C7A924D49717004AD156 /* SceneDelegate.swift in Sources */,
 				4FC6C7AE24D49717004AD156 /* MainView.swift in Sources */,
 				4FC6C7AC24D49717004AD156 /* SampleCoreDataSwiftUIMVVM.xcdatamodeld in Sources */,
