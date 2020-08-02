@@ -35,13 +35,8 @@ struct peopleListView: View {
                 })
             }
             .onDelete { indexSet in
-                for index in indexSet {
-                    // We seem to be mutating the dataset while we're iterating it.
-                    // That seems like a bad idea. Can onDelete swipes ever come in multiples?
-                    let person = viewModel.people[index]
-                    viewModel.deletePerson(person: person)
-                    viewModel.fetchNormalPeople()
-                }
+                viewModel.deletePeopleAtOffsets(indexSet: indexSet)
+                viewModel.fetchNormalPeople()
             }
 
             Button("Add person...") {

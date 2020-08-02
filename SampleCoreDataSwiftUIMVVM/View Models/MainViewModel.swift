@@ -17,6 +17,7 @@ protocol MainViewModelProtocol {
     func fetchAllPeople()
     func newPerson()
     func deletePerson(person: Person)
+    func deletePeopleAtOffsets(indexSet: IndexSet)
     func updatePerson(person: Person)
     func resetToDefaults()
 }
@@ -60,6 +61,18 @@ extension MainViewModel: MainViewModelProtocol {
 
     func deletePerson(person: Person) {
         dataManager.deletePerson(person: person)
+    }
+
+    func deletePeopleAtOffsets(indexSet: IndexSet) {
+        // Collect up references to the people we're removing.
+        // We don't do it in a single loop because then we're mutating self.people while iterating it, which is a bad idea
+        var peopleToRemove = [Person]()
+        for index in indexSet {
+            peopleToRemove.append(people[index])
+        }
+        for person in peopleToRemove {
+            self.deletePerson(person: person)
+        }
     }
 
     func updatePerson(person: Person) {
