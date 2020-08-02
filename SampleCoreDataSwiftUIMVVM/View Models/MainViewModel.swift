@@ -55,7 +55,6 @@ extension MainViewModel: MainViewModelProtocol {
     }
 
     func newPerson() {
-        // FIXME: Feels like a smell that we're specifying defaults in this layer
         dataManager.addPerson(name: "Newy Newerson", ceo: false, visitReason: .SummerVacation, days: Set(0..<7))
     }
 
