@@ -103,7 +103,6 @@ public class CoreDataHelper: DBHelperProtocol {
 
     // MARK: - Persistent store saver
     func saveContext () {
-        let context = persistentContainer.viewContext
         if context.hasChanges {
             do {
                 try context.save()
