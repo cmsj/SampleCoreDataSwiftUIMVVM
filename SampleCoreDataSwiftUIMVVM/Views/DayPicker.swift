@@ -13,19 +13,11 @@ struct CheckmarkTextRow: View {
     var title: String
     var index: Int
     var isSelected: Bool {
-        // This (and the ones below) feel like we're reaching too deep.
-        // PersonEditorViewModel should probably abstract this somewhat
-        viewModel.person.daysAllowed.contains(index)
+        viewModel.hasDay(day: index)
     }
     
     var body: some View {
-        Button(action: {
-            if viewModel.person.daysAllowed.contains(index) {
-                viewModel.person.daysAllowed.remove(index)
-            } else {
-                viewModel.person.daysAllowed.insert(index)
-            }
-        }) {
+        Button(action: { viewModel.toggleDay(day: index) }, label: {
             HStack {
                 Text(self.title)
                 Spacer()
@@ -33,7 +25,7 @@ struct CheckmarkTextRow: View {
                     .opacity(self.isSelected ? 1.0 : 0.0)
                     .animation(.easeInOut(duration: 0.2))
             }
-        }
+        })
     }
 }
 

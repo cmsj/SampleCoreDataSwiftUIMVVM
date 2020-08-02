@@ -12,6 +12,8 @@ import SwiftUI
 protocol PersonEditorViewModelProtocol {
     func updatePerson()
     func deletePerson()
+    func hasDay(day: Int) -> Bool
+    func toggleDay(day: Int)
 }
 
 class PersonEditorViewModel: ObservableObject {
@@ -41,5 +43,17 @@ extension PersonEditorViewModel: PersonEditorViewModelProtocol {
 
     func deletePerson() {
         dataManager.deletePerson(person: self.person)
+    }
+
+    func hasDay(day: Int) -> Bool {
+        return person.daysAllowed.contains(day)
+    }
+
+    func toggleDay(day: Int) {
+        if person.daysAllowed.contains(day) {
+            person.daysAllowed.remove(day)
+        } else {
+            person.daysAllowed.insert(day)
+        }
     }
 }
