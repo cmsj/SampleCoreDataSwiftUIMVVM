@@ -26,11 +26,15 @@ public class CoreDataHelper: DBHelperProtocol {
         }
     }
 
-    func fetch<T: NSManagedObject>(_ objectType: T.Type, predicate: NSPredicate? = nil, limit: Int? = nil) -> Result<[T], Error> {
+    func fetch<T: NSManagedObject>(_ objectType: T.Type, predicate: NSPredicate? = nil, limit: Int? = nil, sortKey: String? = nil, sortAscending: Bool = true) -> Result<[T], Error> {
         let request = objectType.fetchRequest()
         request.predicate = predicate
         if let limit = limit {
             request.fetchLimit = limit
+        }
+        if let sortKey = sortKey {
+            let sortDesc = NSSortDescriptor(key:sortKey, ascending:sortAscending)
+            request.sortDescriptors = [sortDesc]
         }
         do {
             let result = try context.fetch(request)

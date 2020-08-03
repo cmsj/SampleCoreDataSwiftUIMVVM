@@ -40,7 +40,7 @@ class DataManager: DataManagerBase {
 
     func fetchPeople(ceo: Bool) -> [Person] {
         let predicate = NSPredicate(format: "isCEO == %@", NSNumber(value: ceo))
-        let result: Result<[PersonMO], Error> = dbHelper.fetch(PersonMO.self, predicate: predicate)
+        let result: Result<[PersonMO], Error> = dbHelper.fetch(PersonMO.self, predicate: predicate, sortKey: "name")
         switch result {
         case .success(let peopleMOs):
             return peopleMOs.map { $0.convertToPerson() }
