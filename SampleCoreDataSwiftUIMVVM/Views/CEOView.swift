@@ -12,6 +12,7 @@ struct CEOView: View {
 
     var body: some View {
         Section(header: Text("CEO")) {
+            NavigationLink(destination: NavigationLazyView(PersonEditor(personID: viewModel.ceo.id, dataManager: viewModel.dataManager)), label: {
             HStack {
                 Text("CEO:")
                     .font(.footnote)
@@ -33,6 +34,7 @@ struct CEOView: View {
                     }
                 }
             }
+            })
         }
     }
 }

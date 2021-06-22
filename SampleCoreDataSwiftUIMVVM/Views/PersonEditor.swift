@@ -43,7 +43,7 @@ struct PersonEditor: View {
             }
         }
         .listStyle(InsetGroupedListStyle())
-        .navigationTitle("Edit person")
+        .navigationTitle("Edit \(viewModel.person.ceo ? "CEO" : "person")")
     }
 }
 

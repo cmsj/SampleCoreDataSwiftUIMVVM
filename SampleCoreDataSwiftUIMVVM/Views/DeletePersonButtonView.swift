@@ -13,6 +13,7 @@ struct DeletePersonButtonView: View {
     @State private var showingDeleteAlert = false
 
     var body: some View {
+        if !viewModel.person.ceo {
         Section() {
             Button(action: { self.showingDeleteAlert = true }) {
                 HStack {
@@ -36,7 +37,9 @@ struct DeletePersonButtonView: View {
                     .cancel()
                 ])
             }
-        }    }
+        }
+        }
+    }
 }
 
 struct DeletePersonButtonView_Previews: PreviewProvider {
