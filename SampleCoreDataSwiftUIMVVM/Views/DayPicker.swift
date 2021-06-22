@@ -44,10 +44,10 @@ struct DayPicker: View {
 }
 
 struct DayPicker_Previews: PreviewProvider {
-    static let dataManager = MockDataManager()
+    static let dataManager = DataManager.shared
     static let people = dataManager.fetchPeople()
-    
+
     static var previews: some View {
-        DayPicker(viewModel: PersonEditorViewModel(personID: people.first!.id, dataManager: dataManager))
+        DayPicker(viewModel: PersonEditorViewModel(person: people.first!, dataManager: dataManager))
     }
 }

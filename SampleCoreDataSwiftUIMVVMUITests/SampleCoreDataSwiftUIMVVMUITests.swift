@@ -46,7 +46,7 @@ class SampleCoreDataSwiftUIMVVMUITests: XCTestCase {
         let preCount = app.tables.cells.count
 
         let tablesQuery = app.tables
-        tablesQuery/*@START_MENU_TOKEN@*/.buttons["Billy Windowson\n(Summer Vacation)\nEvery day"]/*[[".cells[\"Billy Windowson\\n(Summer Vacation)\\nEvery day\"].buttons[\"Billy Windowson\\n(Summer Vacation)\\nEvery day\"]",".buttons[\"Billy Windowson\\n(Summer Vacation)\\nEvery day\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        tablesQuery.buttons["Billy Windowson, (Summer Vacation), Every day"].tap()
         tablesQuery/*@START_MENU_TOKEN@*/.buttons["Delete Person"]/*[[".cells[\"Delete Person\"].buttons[\"Delete Person\"]",".buttons[\"Delete Person\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         app.sheets["Are you sure?"].scrollViews.otherElements.buttons["Delete"].tap()
 
@@ -54,14 +54,5 @@ class SampleCoreDataSwiftUIMVVMUITests: XCTestCase {
 
         print("pre: \(preCount), post: \(postCount)")
         XCTAssert(postCount - preCount == 1)
-    }
-
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
     }
 }

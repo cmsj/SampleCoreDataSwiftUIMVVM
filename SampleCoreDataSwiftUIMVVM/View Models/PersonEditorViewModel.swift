@@ -22,9 +22,9 @@ class PersonEditorViewModel: ObservableObject {
 
     private var selfSubscriber: AnyCancellable? = nil
 
-    init(personID: UUID, dataManager: DataManagerBase = DataManager.shared) {
+    init(person: Person, dataManager: DataManagerBase = DataManager.shared) {
         self.dataManager = dataManager
-        self.person = dataManager.fetchPerson(personID: personID)
+        self.person = person
 
         selfSubscriber = objectWillChange.sink {
             print("PersonEditorViewModel changed")
@@ -46,14 +46,16 @@ extension PersonEditorViewModel: PersonEditorViewModelProtocol {
     }
 
     func hasDay(day: Int) -> Bool {
-        return person.daysAllowed.contains(day)
+        return person.days!.contains(day)
     }
 
     func toggleDay(day: Int) {
-        if person.daysAllowed.contains(day) {
-            person.daysAllowed.remove(day)
+        self.objectWillChange.send()
+
+        if person.days!.contains(day) {
+            person.days!.remove(day)
         } else {
-            person.daysAllowed.insert(day)
+            person.days!.insert(day)
         }
     }
 }

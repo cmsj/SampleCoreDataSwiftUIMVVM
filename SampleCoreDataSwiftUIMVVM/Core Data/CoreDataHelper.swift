@@ -14,10 +14,32 @@ public class CoreDataHelper: DBHelperProtocol {
     public typealias ObjectType = NSManagedObject
     public typealias PredicateType = NSPredicate
 
-    public var context: NSManagedObjectContext { persistentContainer.viewContext }
+    private var containerDescription: NSPersistentStoreDescription
+    public var persistentContainer: NSPersistentContainer
+    lazy public var context: NSManagedObjectContext = { persistentContainer.viewContext }()
+
+    init(inMemory: Bool = false) {
+        var containerName = "SampleCoreDataSwiftUIMVVM"
+        containerDescription = NSPersistentStoreDescription()
+
+        persistentContainer = NSPersistentContainer(name: containerName, managedObjectModel: NSManagedObjectModel.mergedModel(from: [Bundle(for: type(of: self))])!)
+
+        if inMemory {
+            containerName = "TemporaryStore"
+            containerDescription.type = NSSQLiteStoreType
+            containerDescription.url = URL(fileURLWithPath: "/dev/null")
+            persistentContainer.persistentStoreDescriptions = [containerDescription]
+        }
+
+        print("Loading database from: \(persistentContainer.persistentStoreDescriptions[0])")
+        persistentContainer.loadPersistentStores { _, error in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        }
+    }
 
     // MARK: -  DBHelper Protocol
-
     public func create(_ object: NSManagedObject) {
         do {
             try context.save()
@@ -93,17 +115,6 @@ public class CoreDataHelper: DBHelperProtocol {
             fatalError(error.localizedDescription)
         }
     }
-
-    // MARK: - Persistent store loader
-    lazy var persistentContainer: NSPersistentContainer = {
-      let container = NSPersistentContainer(name: "SampleCoreDataSwiftUIMVVM")
-      container.loadPersistentStores { _, error in
-        if let error = error as NSError? {
-          fatalError("Unresolved error \(error), \(error.userInfo)")
-        }
-      }
-      return container
-    }()
 
     // MARK: - Persistent store saver
     func saveContext () {

@@ -10,8 +10,8 @@ import SwiftUI
 struct PersonEditor: View {
     @ObservedObject var viewModel: PersonEditorViewModel
 
-    init(personID: UUID, dataManager: DataManagerBase) {
-        viewModel = PersonEditorViewModel(personID: personID, dataManager: dataManager)
+    init(person: Person, dataManager: DataManagerBase) {
+        viewModel = PersonEditorViewModel(person: person, dataManager: dataManager)
     }
 
     var body: some View {
@@ -20,7 +20,7 @@ struct PersonEditor: View {
                 HStack {
                     Text("Name")
                     Spacer()
-                    TextField("", text: $viewModel.person.name)
+                    TextField("", text: $viewModel.person.name ?? "")
                 }
                 Picker(selection: $viewModel.person.reason, label: Text("Visit reason")) {
                     ForEach(VisitReason.allCases) { v in
@@ -43,15 +43,19 @@ struct PersonEditor: View {
             }
         }
         .listStyle(InsetGroupedListStyle())
-        .navigationTitle("Edit \(viewModel.person.ceo ? "CEO" : "person")")
+        .navigationTitle("Edit \(viewModel.person.isCEO ? "CEO" : "person")")
     }
 }
 
 struct PersonEditor_Previews: PreviewProvider {
-    static let dataManager = MockDataManager()
+    static let dataManager = DataManager.shared
     static let people = dataManager.fetchPeople()
 
+    init() {
+        DataManager.shared.restoreDefaults()
+    }
+
     static var previews: some View {
-        PersonEditor(personID: people.first!.id, dataManager: dataManager)
+        PersonEditor(person: people.first!, dataManager: dataManager)
     }
 }

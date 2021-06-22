@@ -15,9 +15,9 @@ struct peopleListView: View {
             ForEach(viewModel.people) { person in
                 // In current Xcode 12 betas, NavigationLink() doesn't seem to consistently load destinations lazily
                 // so we're forcing it to, see NavigationLazyView.swift
-                NavigationLink(destination: NavigationLazyView(PersonEditor(personID: person.id, dataManager: viewModel.dataManager)), label: {
+                NavigationLink(destination: NavigationLazyView(PersonEditor(person: person, dataManager: viewModel.dataManager)), label: {
                     HStack {
-                        Text(person.name)
+                        Text(person.name!)
                         Spacer()
                         VStack {
                             HStack {
@@ -42,17 +42,26 @@ struct peopleListView: View {
             }
 
             Button("Add person...") {
-                viewModel.newPerson()
-                viewModel.fetchNormalPeople()
+                withAnimation {
+                    viewModel.newPerson()
+                    viewModel.fetchNormalPeople()
+                }
             }
         }
     }
 }
 
 struct peopleListView_Previews: PreviewProvider {
+    init() {
+        let _ = CoreDataHelper.shared.context
+        DataManager.shared.restoreDefaults()
+    }
+
     static var previews: some View {
+        let context = CoreDataHelper.shared.context
+
         List {
-            peopleListView(viewModel: MainViewModel(dataManager: MockDataManager()))
+            peopleListView(viewModel: MainViewModel()).environment(\.managedObjectContext, context)
         }
         .listStyle(InsetGroupedListStyle())
     }

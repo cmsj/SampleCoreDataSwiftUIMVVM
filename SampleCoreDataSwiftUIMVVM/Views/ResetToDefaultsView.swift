@@ -39,9 +39,16 @@ struct ResetToDefaultsView: View {
 }
 
 struct ResetToDefaultsView_Previews: PreviewProvider {
+    init() {
+        let _ = CoreDataHelper.shared.context
+        DataManager.shared.restoreDefaults()
+    }
+
     static var previews: some View {
+        let context = CoreDataHelper.shared.context
+
         List {
-            ResetToDefaultsView(viewModel: MainViewModel(dataManager: MockDataManager()))
+            ResetToDefaultsView(viewModel: MainViewModel()).environment(\.managedObjectContext, context)
         }
         .listStyle(InsetGroupedListStyle())
     }

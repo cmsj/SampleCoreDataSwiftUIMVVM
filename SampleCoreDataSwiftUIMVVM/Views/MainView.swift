@@ -30,8 +30,6 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = MainViewModel(dataManager: MockDataManager())
-        let view = MainView(viewModel: viewModel)
-        return view
+        MainView(viewModel: MainViewModel(dataManager: DataManager(inMemory: true)))
     }
 }

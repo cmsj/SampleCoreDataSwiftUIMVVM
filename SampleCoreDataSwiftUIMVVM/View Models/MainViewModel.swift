@@ -23,7 +23,7 @@ protocol MainViewModelProtocol {
 }
 
 class MainViewModel: ObservableObject {
-    @Published var ceo = Person()
+    @Published var ceo: Person
     @Published var people = [Person]()
 
     @ObservedObject var dataManager: DataManagerBase
@@ -31,6 +31,7 @@ class MainViewModel: ObservableObject {
 
     init(dataManager: DataManagerBase = DataManager.shared) {
         self.dataManager = dataManager
+        ceo = dataManager.fetchCEO()
         fetchAllPeople()
         self.dataManagerSubscriber = dataManager.objectWillChange
             .sink {

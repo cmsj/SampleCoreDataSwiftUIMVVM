@@ -12,11 +12,11 @@ struct CEOView: View {
 
     var body: some View {
         Section(header: Text("CEO")) {
-            NavigationLink(destination: NavigationLazyView(PersonEditor(personID: viewModel.ceo.id, dataManager: viewModel.dataManager)), label: {
+            NavigationLink(destination: NavigationLazyView(PersonEditor(person: viewModel.ceo, dataManager: viewModel.dataManager)), label: {
             HStack {
                 Text("CEO:")
                     .font(.footnote)
-                Text(viewModel.ceo.name)
+                Text(viewModel.ceo.name!)
                     .font(.footnote)
                 VStack {
                     HStack {
@@ -40,9 +40,16 @@ struct CEOView: View {
 }
 
 struct CEOView_Previews: PreviewProvider {
+    init() {
+        let _ = CoreDataHelper.shared.context
+        DataManager.shared.restoreDefaults()
+    }
+
     static var previews: some View {
+        let context = CoreDataHelper.shared.context
+
         List {
-            CEOView(viewModel: MainViewModel(dataManager: MockDataManager()))
+            CEOView(viewModel: MainViewModel()).environment(\.managedObjectContext, context)
         }
         .listStyle(InsetGroupedListStyle())
     }
