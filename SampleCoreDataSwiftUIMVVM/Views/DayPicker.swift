@@ -44,7 +44,7 @@ struct DayPicker: View {
 }
 
 struct DayPicker_Previews: PreviewProvider {
-    static let dataManager = DataManager.shared
+    static let dataManager = DataManager.init(inMemory: true)
     static let people = dataManager.fetchPeople()
 
     static var previews: some View {

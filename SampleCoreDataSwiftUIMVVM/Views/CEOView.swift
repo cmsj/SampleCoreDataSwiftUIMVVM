@@ -40,16 +40,9 @@ struct CEOView: View {
 }
 
 struct CEOView_Previews: PreviewProvider {
-    init() {
-        let _ = CoreDataHelper.shared.context
-        DataManager.shared.restoreDefaults()
-    }
-
     static var previews: some View {
-        let context = CoreDataHelper.shared.context
-
         List {
-            CEOView(viewModel: MainViewModel()).environment(\.managedObjectContext, context)
+            CEOView(viewModel: MainViewModel(dataManager: DataManager(inMemory: true)))
         }
         .listStyle(InsetGroupedListStyle())
     }

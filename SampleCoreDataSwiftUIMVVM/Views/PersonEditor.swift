@@ -48,12 +48,8 @@ struct PersonEditor: View {
 }
 
 struct PersonEditor_Previews: PreviewProvider {
-    static let dataManager = DataManager.shared
+    static let dataManager = DataManager(inMemory: true)
     static let people = dataManager.fetchPeople()
-
-    init() {
-        DataManager.shared.restoreDefaults()
-    }
 
     static var previews: some View {
         PersonEditor(person: people.first!, dataManager: dataManager)

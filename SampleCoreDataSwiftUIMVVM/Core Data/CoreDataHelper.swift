@@ -26,7 +26,6 @@ public class CoreDataHelper: DBHelperProtocol {
 
         if inMemory {
             containerName = "TemporaryStore"
-            containerDescription.type = NSSQLiteStoreType
             containerDescription.url = URL(fileURLWithPath: "/dev/null")
             persistentContainer.persistentStoreDescriptions = [containerDescription]
         }

@@ -52,16 +52,9 @@ struct peopleListView: View {
 }
 
 struct peopleListView_Previews: PreviewProvider {
-    init() {
-        let _ = CoreDataHelper.shared.context
-        DataManager.shared.restoreDefaults()
-    }
-
     static var previews: some View {
-        let context = CoreDataHelper.shared.context
-
         List {
-            peopleListView(viewModel: MainViewModel()).environment(\.managedObjectContext, context)
+            peopleListView(viewModel: MainViewModel(dataManager: DataManager(inMemory: true)))
         }
         .listStyle(InsetGroupedListStyle())
     }
