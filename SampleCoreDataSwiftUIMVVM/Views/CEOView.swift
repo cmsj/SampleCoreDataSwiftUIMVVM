@@ -40,10 +40,13 @@ struct CEOView: View {
 }
 
 struct CEOView_Previews: PreviewProvider {
+    static let dataManager = DataManager(inMemory: true)
+
     static var previews: some View {
         List {
-            CEOView(viewModel: MainViewModel(dataManager: DataManager(inMemory: true)))
+            CEOView(viewModel: MainViewModel(dataManager: dataManager))
         }
         .listStyle(InsetGroupedListStyle())
+.previewInterfaceOrientation(.landscapeLeft)
     }
 }

@@ -52,9 +52,11 @@ struct peopleListView: View {
 }
 
 struct peopleListView_Previews: PreviewProvider {
+    static let dataManager = DataManager(inMemory: true)
+
     static var previews: some View {
         List {
-            peopleListView(viewModel: MainViewModel(dataManager: DataManager(inMemory: true)))
+            peopleListView(viewModel: MainViewModel(dataManager: dataManager))
         }
         .listStyle(InsetGroupedListStyle())
     }

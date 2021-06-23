@@ -29,7 +29,10 @@ struct MainView: View {
 }
 
 struct MainView_Previews: PreviewProvider {
+    static let dataManager = DataManager(inMemory: true)
+
     static var previews: some View {
-        MainView(viewModel: MainViewModel(dataManager: DataManager(inMemory: true)))
+        MainView(viewModel: MainViewModel(dataManager: dataManager))
+.previewInterfaceOrientation(.landscapeLeft)
     }
 }
