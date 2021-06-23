@@ -24,20 +24,20 @@ protocol MainViewModelProtocol {
 
 class MainViewModel: ObservableObject {
     @Published var ceo: Person
-    @Published var people = [Person]()
+    @Published var people: [Person] = []
 
     @ObservedObject var dataManager: DataManagerBase
     private var dataManagerSubscriber: AnyCancellable? = nil
 
     init(dataManager: DataManagerBase = DataManager.shared) {
         self.dataManager = dataManager
-        ceo = dataManager.fetchCEO()
+        ceo = dataManager.fetchCEO() // This is a bit of a hack to allow self.ceo to not be initialised when it's declared, which isn't possible because it's a Core Data object
         fetchAllPeople()
         self.dataManagerSubscriber = dataManager.objectWillChange
             .sink {
-            print("dataManager changed, reloading MainViewModel data")
-            self.fetchAllPeople()
-        }
+                print("dataManager changed, reloading MainViewModel data")
+                self.fetchAllPeople()
+            }
     }
 }
 
