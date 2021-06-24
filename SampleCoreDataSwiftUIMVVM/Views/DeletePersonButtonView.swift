@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct DeletePersonButtonView: View {
+    @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @ObservedObject var viewModel: PersonEditorViewModel
+    @ObservedObject var person: Person
     @State private var showingDeleteAlert = false
 
     var body: some View {
-        if !viewModel.person.isCEO {
+        if !person.isCEO {
             Section() {
                 Button(action: { self.showingDeleteAlert = true }) {
                     HStack {
@@ -31,7 +32,7 @@ struct DeletePersonButtonView: View {
 
                         // The 0.3 here is a completely magic number that tries to make sure we get back to the main list view right before the delete takes effect and the person animates out of the list.
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
-                            viewModel.deletePerson()
+                            viewContext.delete(person)
                         })
                     },
                         .cancel()
@@ -44,11 +45,11 @@ struct DeletePersonButtonView: View {
 
 struct DeletePersonButtonView_Previews: PreviewProvider {
     static let dataManager = DataManager.init(inMemory: true)
-    static let people = dataManager.fetchPeople()
+    static let people = dataManager.fetchPeople(ceo: false)
 
     static var previews: some View {
         List() {
-            DeletePersonButtonView(viewModel: PersonEditorViewModel(person: people.first!, dataManager: dataManager))
+            DeletePersonButtonView(person: people.first!)
         }
         .listStyle(InsetGroupedListStyle())
     }

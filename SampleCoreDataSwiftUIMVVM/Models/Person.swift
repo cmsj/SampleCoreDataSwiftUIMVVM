@@ -20,7 +20,7 @@ public enum VisitReason: String, CaseIterable, Identifiable {
 extension Person {
     // Adapt the Person entity's reasonStore string to a VisitReason enum
     var reason: VisitReason {
-        get { VisitReason(rawValue: self.reasonStore!)! }
+        get { VisitReason(rawValue: self.reasonStore ?? VisitReason.Unknown.rawValue)! }
         set { self.reasonStore = newValue.rawValue }
     }
 
@@ -39,11 +39,25 @@ extension Person {
             let dayLabels = DateFormatter().shortStandaloneWeekdaySymbols
             var summaryParts: [String] = []
             for (index, day) in dayLabels!.enumerated() {
-                if self.days!.contains(index) {
+                if (self.days != nil) && self.days!.contains(index) {
                     summaryParts.append(day)
                 }
             }
             return summaryParts.joined(separator: ", ")
+        }
+    }
+
+    func hasDay(day: Int) -> Bool {
+        return days!.contains(day)
+    }
+
+    func toggleDay(day: Int) {
+        self.objectWillChange.send()
+
+        if days!.contains(day) {
+            days!.remove(day)
+        } else {
+            days!.insert(day)
         }
     }
 }

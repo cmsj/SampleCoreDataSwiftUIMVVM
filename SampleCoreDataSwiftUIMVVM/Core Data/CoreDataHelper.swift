@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-public class CoreDataHelper: DBHelperProtocol {
+public class CoreDataHelper {
     public static let shared = CoreDataHelper()
 
     public typealias ObjectType = NSManagedObject
@@ -62,45 +62,6 @@ public class CoreDataHelper: DBHelperProtocol {
             return .success(result as? [T] ?? [])
         } catch {
             return .failure(error)
-        }
-    }
-
-    public func fetchFirst<T: NSManagedObject>(_ objectType: T.Type, predicate: NSPredicate?) -> Result<T?, Error> {
-        let request = objectType.fetchRequest()
-        request.predicate = predicate
-        request.fetchLimit = 1
-        do {
-            let result = try context.fetch(request) as? [T]
-            return .success(result?.first)
-        } catch {
-            return .failure(error)
-        }
-    }
-
-    public func update(_ object: NSManagedObject?) {
-        if object == nil {
-            print("Asked to update an empty object.")
-            return
-        }
-
-        do {
-            try context.save()
-        } catch {
-            fatalError("error saving context while updating an object")
-        }
-    }
-
-    public func delete(_ object: NSManagedObject?) {
-        if object == nil {
-            print("Asked to delete an empty object.")
-            return
-        }
-
-        do {
-            context.delete(object!)
-            try context.save()
-        } catch {
-            fatalError("error saving context while deleting an object")
         }
     }
 

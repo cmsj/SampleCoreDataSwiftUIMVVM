@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Create the SwiftUI view
         let viewModel = MainViewModel()
-        let contentView = MainView(viewModel: viewModel).environment(\.managedObjectContext, (viewModel.dataManager as! DataManager).dbHelper.context)
+        let contentView = MainView(viewModel: viewModel).environment(\.managedObjectContext, (viewModel.dataManager).dbHelper.context)
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

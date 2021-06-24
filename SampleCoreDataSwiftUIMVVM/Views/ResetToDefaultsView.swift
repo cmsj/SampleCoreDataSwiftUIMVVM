@@ -30,7 +30,6 @@ struct ResetToDefaultsView: View {
                             buttons: [
                                 .destructive(Text("Reset Peoplr")) {
                                     viewModel.resetToDefaults()
-//                                    viewModel.fetchAllPeople()
                                 },
                                 .cancel()
                             ])

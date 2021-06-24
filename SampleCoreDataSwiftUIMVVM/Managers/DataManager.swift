@@ -9,33 +9,20 @@ import Foundation
 import Combine
 
 // MARK: - Core Data manager
-class DataManager: DataManagerBase {
+class DataManager: ObservableObject {
     static let shared = DataManager()
     var dbHelper: CoreDataHelper
 
     init(inMemory: Bool = false) {
         dbHelper = CoreDataHelper(inMemory: inMemory)
-        super.init()
 
-        if inMemory && ProcessInfo.processInfo.arguments.contains("UI-TESTING") {
-            // We're running in UI Testing or SwiftUI Previews or something, unconditionally restore some defaults
+        if inMemory || ProcessInfo.processInfo.arguments.contains("UI-TESTING") {
+            // We're running in UI Testing or SwiftUI Previews - unconditionally restore some defaults
             restoreDefaults()
         }
 
         // Check if we have invalid data and if so, reset to defaults
         defaultsIfInvalid()
-    }
-
-    override func fetchCEO() -> Person {
-        let people = fetchPeople(ceo: true)
-        if people.count == 0 {
-            return Person()
-        }
-        return people.first!
-    }
-
-    override func fetchPeople() -> [Person] {
-        return fetchPeople(ceo: false)
     }
 
     func fetchPeople(ceo: Bool) -> [Person] {
@@ -49,18 +36,7 @@ class DataManager: DataManagerBase {
         }
     }
 
-    override func fetchPerson(personID: UUID) -> Person {
-        let predicate = NSPredicate(format: "uuid == %@", personID as CVarArg)
-        let result: Result<Person?, Error> = dbHelper.fetchFirst(Person.self, predicate: predicate)
-        switch result {
-        case .success(let person):
-            return person!
-        case .failure(let error):
-            fatalError(error.localizedDescription)
-        }
-    }
-
-    override func addPerson(name: String, ceo: Bool, visitReason: VisitReason, days: Set<Int>) {
+    func addPerson(name: String, ceo: Bool, visitReason: VisitReason, days: Set<Int>) {
         let entity = Person.entity()
         let newPerson = Person(entity: entity, insertInto: dbHelper.context)
         newPerson.uuid = UUID()
@@ -73,22 +49,12 @@ class DataManager: DataManagerBase {
         dbHelper.create(newPerson)
     }
 
-    override func deletePerson(person: Person) {
-        dbHelper.delete(person)
-        self.objectWillChange.send()
-    }
-
-    override func updatePerson(person: Person) {
-        self.objectWillChange.send()
-        dbHelper.update(person)
-    }
-
-    override func deleteAll() {
+    func deleteAll() {
         self.objectWillChange.send()
         dbHelper.deleteAll(Person.self)
     }
 
-    override func restoreDefaults() {
+    func restoreDefaults() {
         deleteAll()
 
         addPerson(name: "Jonny Appleseed", ceo: true, visitReason: .Staff, days: Set(0..<7))
@@ -99,7 +65,7 @@ class DataManager: DataManagerBase {
         print("Restored defaults")
     }
 
-    override func defaultsIfInvalid() {
+    func defaultsIfInvalid() {
         let ceo = fetchPeople(ceo: true)
 
         if ceo.count != 1 {

@@ -14,17 +14,14 @@ struct MainView: View {
     var body: some View {
         NavigationView {
             List() {
-                CEOView(viewModel: viewModel).environment(\.managedObjectContext, viewContext)
+                CEOView()
 
-                peopleListView(viewModel: viewModel).environment(\.managedObjectContext, viewContext)
+                PeopleListView()
 
-                ResetToDefaultsView(viewModel: viewModel).environment(\.managedObjectContext, viewContext)
+                ResetToDefaultsView(viewModel: viewModel)
             }
             .listStyle(InsetGroupedListStyle())
             .navigationTitle("Peoplr")
-        }
-        .onAppear {
-            self.viewModel.fetchAllPeople()
         }
     }
 }

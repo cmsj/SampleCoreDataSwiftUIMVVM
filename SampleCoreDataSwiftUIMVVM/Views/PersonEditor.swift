@@ -8,11 +8,7 @@
 import SwiftUI
 
 struct PersonEditor: View {
-    @ObservedObject var viewModel: PersonEditorViewModel
-
-    init(person: Person, dataManager: DataManagerBase) {
-        viewModel = PersonEditorViewModel(person: person, dataManager: dataManager)
-    }
+    @ObservedObject var person: Person
 
     var body: some View {
         List {
@@ -20,38 +16,38 @@ struct PersonEditor: View {
                 HStack {
                     Text("Name")
                     Spacer()
-                    TextField("", text: $viewModel.person.name ?? "")
+                    TextField("", text: $person.name ?? "")
                 }
-                Picker(selection: $viewModel.person.reason, label: Text("Visit reason")) {
+                Picker(selection: $person.reason, label: Text("Visit reason")) {
                     ForEach(VisitReason.allCases) { v in
                         Text(v.rawValue)
                     }
                 }
             }
             Section(header: Text("Days")) {
-                NavigationLink(destination: DayPicker(viewModel: viewModel), label: {
+                NavigationLink(destination: DayPicker(person: person), label: {
                     Text("Days")
                     Spacer()
-                    Text(viewModel.person.daySummary)
+                    Text(person.daySummary)
                         .font(.footnote)
                         .foregroundColor(Color.gray)
                         .multilineTextAlignment(.trailing)
                 })
             }
             Section() {
-                DeletePersonButtonView(viewModel: viewModel)
+                DeletePersonButtonView(person: person)
             }
         }
         .listStyle(InsetGroupedListStyle())
-        .navigationTitle("Edit \(viewModel.person.isCEO ? "CEO" : "person")")
+        .navigationTitle("Edit \(person.isCEO ? "CEO" : "person")")
     }
 }
 
-struct PersonEditor_Previews: PreviewProvider {
-    static let dataManager = DataManager(inMemory: true)
-    static let people = dataManager.fetchPeople()
-
-    static var previews: some View {
-        PersonEditor(person: people.first!, dataManager: dataManager)
-    }
-}
+//struct PersonEditor_Previews: PreviewProvider {
+//    static let dataManager = DataManager(inMemory: true)
+//    static let people = dataManager.fetchPeople()
+//
+//    static var previews: some View {
+//        PersonEditor(person: people.first!, dataManager: dataManager)
+//    }
+//}
