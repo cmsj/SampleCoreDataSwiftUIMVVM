@@ -19,7 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
         // Create the SwiftUI view
-        let contentView = MainView(viewModel: MainViewModel())
+        let viewModel = MainViewModel()
+        let contentView = MainView(viewModel: viewModel).environment(\.managedObjectContext, (viewModel.dataManager as! DataManager).dbHelper.context)
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

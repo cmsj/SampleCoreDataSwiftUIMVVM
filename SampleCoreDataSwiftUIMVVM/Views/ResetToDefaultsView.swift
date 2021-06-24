@@ -10,6 +10,7 @@ import SwiftUI
 struct ResetToDefaultsView: View {
     @ObservedObject var viewModel: MainViewModel
     @State private var showingResetAlert = false
+    @Environment(\.managedObjectContext) private var viewContext
 
     let message = "This will erase all people and restore the defaults"
 
@@ -29,7 +30,7 @@ struct ResetToDefaultsView: View {
                             buttons: [
                                 .destructive(Text("Reset Peoplr")) {
                                     viewModel.resetToDefaults()
-                                    viewModel.fetchAllPeople()
+//                                    viewModel.fetchAllPeople()
                                 },
                                 .cancel()
                             ])

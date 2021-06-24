@@ -9,15 +9,16 @@ import SwiftUI
 
 struct MainView: View {
     @ObservedObject var viewModel: MainViewModel
+    @Environment(\.managedObjectContext) private var viewContext
 
     var body: some View {
         NavigationView {
             List() {
-                CEOView(viewModel: viewModel)
+                CEOView(viewModel: viewModel).environment(\.managedObjectContext, viewContext)
 
-                peopleListView(viewModel: viewModel)
+                peopleListView(viewModel: viewModel).environment(\.managedObjectContext, viewContext)
 
-                ResetToDefaultsView(viewModel: viewModel)
+                ResetToDefaultsView(viewModel: viewModel).environment(\.managedObjectContext, viewContext)
             }
             .listStyle(InsetGroupedListStyle())
             .navigationTitle("Peoplr")
