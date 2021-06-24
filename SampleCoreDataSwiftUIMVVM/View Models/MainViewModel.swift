@@ -18,4 +18,11 @@ class MainViewModel: ObservableObject {
     func resetToDefaults() {
         dataManager.restoreDefaults()
     }
+
+    func save() {
+        if dataManager.dbHelper.context.hasChanges {
+            print("Saving!")
+            dataManager.dbHelper.saveContext()
+        }
+    }
 }
