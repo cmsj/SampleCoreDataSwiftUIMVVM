@@ -8,31 +8,6 @@
 import SwiftUI
 import CoreData
 
-struct PeopleListViewItem: View {
-    @ObservedObject var person: Person
-
-    var body: some View {
-        HStack {
-            Text(person.name ?? "Unknown")
-            Spacer()
-            VStack {
-                HStack {
-                    Spacer()
-                    Text("(\(person.reason.rawValue))")
-                        .font(.footnote)
-                        .multilineTextAlignment(.trailing)
-                }
-                HStack {
-                    Spacer()
-                    Text(person.daySummary)
-                        .font(.footnote)
-                        .multilineTextAlignment(.trailing)
-                }
-            }
-        }
-    }
-}
-
 struct PeopleListView: View {
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Person.name, ascending: true)], predicate: NSPredicate(format: "isCEO == false")) var people: FetchedResults<Person>
     @Environment(\.managedObjectContext) private var viewContext
@@ -43,7 +18,7 @@ struct PeopleListView: View {
                 // In current Xcode 12 betas, NavigationLink() doesn't seem to consistently load destinations lazily
                 // so we're forcing it to, see NavigationLazyView.swift
                 NavigationLink(destination: NavigationLazyView(PersonEditor(person: person)), label: {
-                    PeopleListViewItem(person: person)
+                    PersonListItem(person: person)
                 })
             }
             .onDelete { indexSet in

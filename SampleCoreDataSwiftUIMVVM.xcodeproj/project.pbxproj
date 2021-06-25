@@ -20,11 +20,11 @@
 		4FC6C7C824D49B8D004AD156 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6C7C724D49B8D004AD156 /* CoreDataHelper.swift */; };
 		4FC6C7CB24D49C40004AD156 /* NSManagedObjectContext+executeAndMerge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6C7CA24D49C40004AD156 /* NSManagedObjectContext+executeAndMerge.swift */; };
 		4FC6C7CD24D49C6A004AD156 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6C7CC24D49C6A004AD156 /* DataManager.swift */; };
-		4FC6C7CF24D4B142004AD156 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6C7CE24D4B142004AD156 /* MainViewModel.swift */; };
 		4FC6C7D424D4B9CD004AD156 /* CEOView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6C7D324D4B9CD004AD156 /* CEOView.swift */; };
 		4FC6C7D624D4B9DA004AD156 /* PeopleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6C7D524D4B9DA004AD156 /* PeopleListView.swift */; };
 		4FC6C7D824D4BA1C004AD156 /* ResetToDefaultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6C7D724D4BA1C004AD156 /* ResetToDefaultsView.swift */; };
 		4FC6C7DA24D4BC69004AD156 /* PersonEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6C7D924D4BC69004AD156 /* PersonEditor.swift */; };
+		4FED707626864BB9007D48E8 /* PersonListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FED707526864BB9007D48E8 /* PersonListItem.swift */; };
 		4FF5300524D76E4800F4F9AC /* NavigationLazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF5300424D76E4800F4F9AC /* NavigationLazyView.swift */; };
 /* End PBXBuildFile section */
 
@@ -56,11 +56,11 @@
 		4FC6C7C724D49B8D004AD156 /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		4FC6C7CA24D49C40004AD156 /* NSManagedObjectContext+executeAndMerge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+executeAndMerge.swift"; sourceTree = "<group>"; };
 		4FC6C7CC24D49C6A004AD156 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
-		4FC6C7CE24D4B142004AD156 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		4FC6C7D324D4B9CD004AD156 /* CEOView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CEOView.swift; sourceTree = "<group>"; };
 		4FC6C7D524D4B9DA004AD156 /* PeopleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleListView.swift; sourceTree = "<group>"; };
 		4FC6C7D724D4BA1C004AD156 /* ResetToDefaultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetToDefaultsView.swift; sourceTree = "<group>"; };
 		4FC6C7D924D4BC69004AD156 /* PersonEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonEditor.swift; sourceTree = "<group>"; };
+		4FED707526864BB9007D48E8 /* PersonListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonListItem.swift; sourceTree = "<group>"; };
 		4FF5300424D76E4800F4F9AC /* NavigationLazyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLazyView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -154,7 +154,6 @@
 		4FC6C7BF24D49733004AD156 /* View Models */ = {
 			isa = PBXGroup;
 			children = (
-				4FC6C7CE24D4B142004AD156 /* MainViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -163,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				4FC6C7AD24D49717004AD156 /* MainView.swift */,
+				4FED707526864BB9007D48E8 /* PersonListItem.swift */,
 				4FC6C7D324D4B9CD004AD156 /* CEOView.swift */,
 				4FC6C7D524D4B9DA004AD156 /* PeopleListView.swift */,
 				4FC6C7D724D4BA1C004AD156 /* ResetToDefaultsView.swift */,
@@ -299,6 +299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F27AD0524D4CBBD005295D8 /* DeletePersonButtonView.swift in Sources */,
+				4FED707626864BB9007D48E8 /* PersonListItem.swift in Sources */,
 				4FC6C7C424D49853004AD156 /* Person.swift in Sources */,
 				4FC6C7CD24D49C6A004AD156 /* DataManager.swift in Sources */,
 				4F27AD0724D4CC16005295D8 /* DayPicker.swift in Sources */,
@@ -313,7 +314,6 @@
 				4FF5300524D76E4800F4F9AC /* NavigationLazyView.swift in Sources */,
 				4FC6C7AE24D49717004AD156 /* MainView.swift in Sources */,
 				4FC6C7AC24D49717004AD156 /* SampleCoreDataSwiftUIMVVM.xcdatamodeld in Sources */,
-				4FC6C7CF24D4B142004AD156 /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

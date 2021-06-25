@@ -7,12 +7,14 @@
 
 import Foundation
 import Combine
+import CoreData
 
 // MARK: - Core Data manager
 class DataManager: ObservableObject {
     static let shared = DataManager()
     var dbHelper: CoreDataHelper
 
+    lazy var viewContext: NSManagedObjectContext = { dbHelper.context }()
     init(inMemory: Bool = false) {
         dbHelper = CoreDataHelper(inMemory: inMemory)
 
@@ -71,6 +73,13 @@ class DataManager: ObservableObject {
         if ceo.count != 1 {
             deleteAll()
             restoreDefaults()
+        }
+    }
+
+    func save() {
+        if dbHelper.context.hasChanges {
+            print("Saving!")
+            dbHelper.saveContext()
         }
     }
 }

@@ -25,8 +25,7 @@ struct CEOView: View {
 
         Section(header: Text("CEO")) {
             NavigationLink(destination: NavigationLazyView(PersonEditor(person: person!)), label: {
-                PeopleListViewItem(person: person!)
-
+                PersonListItem(person: person!)
             })
         }
     }
@@ -38,6 +37,6 @@ struct CEOView_Previews: PreviewProvider {
             CEOView()
         }
         .listStyle(InsetGroupedListStyle())
-.previewInterfaceOrientation(.landscapeLeft)
+        .previewInterfaceOrientation(.landscapeLeft)
     }
 }

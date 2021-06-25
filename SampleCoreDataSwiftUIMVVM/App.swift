@@ -10,14 +10,14 @@ import SwiftUI
 @main
 struct SampleApp: App {
     @Environment(\.scenePhase) private var scenePhase
-    let viewModel = MainViewModel()
+    private var dataManager = DataManager.shared
 
     var body: some Scene {
         WindowGroup {
-            MainView(viewModel: viewModel).environment(\.managedObjectContext, (viewModel.dataManager).dbHelper.context)
+            MainView().environment(\.managedObjectContext, dataManager.viewContext)
         }
         .onChange(of: scenePhase) { newValue in
-            viewModel.save()
+            dataManager.save()
         }
     }
 }

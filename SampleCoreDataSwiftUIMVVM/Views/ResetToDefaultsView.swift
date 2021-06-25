@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ResetToDefaultsView: View {
-    @ObservedObject var viewModel: MainViewModel
+    @ObservedObject var dataManager = DataManager.shared
     @State private var showingResetAlert = false
     @Environment(\.managedObjectContext) private var viewContext
 
@@ -24,13 +24,12 @@ struct ResetToDefaultsView: View {
                         .multilineTextAlignment(.center)
                     Spacer()
                 }
-            }.actionSheet(isPresented: $showingResetAlert) {
+            }
+            .actionSheet(isPresented: $showingResetAlert) {
                 ActionSheet(title: Text("Are you sure?"),
                             message: Text(message),
                             buttons: [
-                                .destructive(Text("Reset Peoplr")) {
-                                    viewModel.resetToDefaults()
-                                },
+                                .destructive(Text("Reset Peoplr")) { dataManager.restoreDefaults() },
                                 .cancel()
                             ])
             }
@@ -38,13 +37,13 @@ struct ResetToDefaultsView: View {
     }
 }
 
-struct ResetToDefaultsView_Previews: PreviewProvider {
-    static let dataManager = DataManager(inMemory: true)
-
-    static var previews: some View {
-        List {
-            ResetToDefaultsView(viewModel: MainViewModel(dataManager: dataManager))
-        }
-        .listStyle(InsetGroupedListStyle())
-    }
-}
+//struct ResetToDefaultsView_Previews: PreviewProvider {
+//    static let dataManager = DataManager(inMemory: true)
+//
+//    static var previews: some View {
+//        List {
+//            ResetToDefaultsView(viewModel: MainViewModel(dataManager: dataManager))
+//        }
+//        .listStyle(InsetGroupedListStyle())
+//    }
+//}
