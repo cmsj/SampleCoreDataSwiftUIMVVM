@@ -11,9 +11,6 @@ import CoreData
 public class CoreDataHelper {
     public static let shared = CoreDataHelper()
 
-    public typealias ObjectType = NSManagedObject
-    public typealias PredicateType = NSPredicate
-
     private var containerDescription: NSPersistentStoreDescription
     public var persistentContainer: NSPersistentContainer
     lazy public var context: NSManagedObjectContext = { persistentContainer.viewContext }()
