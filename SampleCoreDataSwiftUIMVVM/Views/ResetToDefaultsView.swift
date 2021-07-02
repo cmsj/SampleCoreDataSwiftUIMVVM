@@ -10,7 +10,6 @@ import SwiftUI
 struct ResetToDefaultsView: View {
     @ObservedObject var dataManager = DataManager.shared
     @State private var showingResetAlert = false
-    @Environment(\.managedObjectContext) private var viewContext
 
     let message = "This will erase all people and restore the defaults"
 
