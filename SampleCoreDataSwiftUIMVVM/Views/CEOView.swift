@@ -32,9 +32,11 @@ struct CEOView: View {
 }
 
 struct CEOView_Previews: PreviewProvider {
+    static var context = DataManager.shared.viewContext
+
     static var previews: some View {
         List {
-            CEOView()
+            CEOView().environment(\.managedObjectContext, context)
         }
         .listStyle(InsetGroupedListStyle())
         .previewInterfaceOrientation(.landscapeLeft)

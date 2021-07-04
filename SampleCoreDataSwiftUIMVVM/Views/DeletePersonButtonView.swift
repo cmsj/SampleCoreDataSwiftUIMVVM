@@ -44,12 +44,12 @@ struct DeletePersonButtonView: View {
 }
 
 struct DeletePersonButtonView_Previews: PreviewProvider {
-    static let dataManager = DataManager.init(inMemory: true)
+    static let dataManager = DataManager.shared
     static let people = dataManager.fetchPeople(ceo: false)
 
     static var previews: some View {
         List() {
-            DeletePersonButtonView(person: people.first!)
+            DeletePersonButtonView(person: people.first!).environment(\.managedObjectContext, dataManager.viewContext)
         }
         .listStyle(InsetGroupedListStyle())
     }

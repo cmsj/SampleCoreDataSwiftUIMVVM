@@ -42,11 +42,11 @@ struct PeopleListView: View {
 }
 
 struct peopleListView_Previews: PreviewProvider {
-    static let dataManager = DataManager(inMemory: true)
+    static var context = DataManager.shared.viewContext
 
     static var previews: some View {
         List {
-            PeopleListView()
+            PeopleListView().environment(\.managedObjectContext, context)
         }
         .listStyle(InsetGroupedListStyle())
     }

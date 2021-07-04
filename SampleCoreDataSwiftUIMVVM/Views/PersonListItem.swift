@@ -31,3 +31,14 @@ struct PersonListItem: View {
         }
     }
 }
+
+struct PersonListItem_Previews: PreviewProvider {
+    static let dataManager = DataManager.shared
+    static let people = dataManager.fetchPeople(ceo: false)
+
+    static var previews: some View {
+        List {
+            PersonListItem(person: people.first!)
+        }
+    }
+}

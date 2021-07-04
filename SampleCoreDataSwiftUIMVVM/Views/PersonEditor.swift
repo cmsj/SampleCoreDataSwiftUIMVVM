@@ -43,11 +43,11 @@ struct PersonEditor: View {
     }
 }
 
-//struct PersonEditor_Previews: PreviewProvider {
-//    static let dataManager = DataManager(inMemory: true)
-//    static let people = dataManager.fetchPeople()
-//
-//    static var previews: some View {
-//        PersonEditor(person: people.first!, dataManager: dataManager)
-//    }
-//}
+struct PersonEditor_Previews: PreviewProvider {
+    static let dataManager = DataManager.shared
+    static let people = dataManager.fetchPeople(ceo: false)
+
+    static var previews: some View {
+        PersonEditor(person: people.first!)
+    }
+}

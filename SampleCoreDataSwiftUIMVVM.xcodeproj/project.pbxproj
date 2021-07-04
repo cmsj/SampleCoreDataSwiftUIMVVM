@@ -11,6 +11,7 @@
 		4F27AD0524D4CBBD005295D8 /* DeletePersonButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F27AD0424D4CBBD005295D8 /* DeletePersonButtonView.swift */; };
 		4F27AD0724D4CC16005295D8 /* DayPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F27AD0624D4CC16005295D8 /* DayPicker.swift */; };
 		4F39A96B24D7211100D69F5A /* SampleCoreDataSwiftUIMVVMUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F39A96A24D7211100D69F5A /* SampleCoreDataSwiftUIMVVMUITests.swift */; };
+		4F5AB9682692635D00AA0186 /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5AB9672692635D00AA0186 /* LogManager.swift */; };
 		4F98992D2682358D006F027A /* Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F98992C2682358D006F027A /* Binding.swift */; };
 		4FC6C7AC24D49717004AD156 /* SampleCoreDataSwiftUIMVVM.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6C7AA24D49717004AD156 /* SampleCoreDataSwiftUIMVVM.xcdatamodeld */; };
 		4FC6C7AE24D49717004AD156 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6C7AD24D49717004AD156 /* MainView.swift */; };
@@ -45,6 +46,7 @@
 		4F39A96824D7211100D69F5A /* SampleCoreDataSwiftUIMVVMUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SampleCoreDataSwiftUIMVVMUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F39A96A24D7211100D69F5A /* SampleCoreDataSwiftUIMVVMUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleCoreDataSwiftUIMVVMUITests.swift; sourceTree = "<group>"; };
 		4F39A96C24D7211100D69F5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4F5AB9672692635D00AA0186 /* LogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogManager.swift; sourceTree = "<group>"; };
 		4F98992C2682358D006F027A /* Binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Binding.swift; sourceTree = "<group>"; };
 		4FC6C7A324D49717004AD156 /* SampleCoreDataSwiftUIMVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleCoreDataSwiftUIMVVM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FC6C7AB24D49717004AD156 /* SampleCoreDataSwiftUIMVVM.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SampleCoreDataSwiftUIMVVM.xcdatamodel; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				4FC6C7CC24D49C6A004AD156 /* DataManager.swift */,
+				4F5AB9672692635D00AA0186 /* LogManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F5AB9682692635D00AA0186 /* LogManager.swift in Sources */,
 				4F27AD0524D4CBBD005295D8 /* DeletePersonButtonView.swift in Sources */,
 				4FED707626864BB9007D48E8 /* PersonListItem.swift in Sources */,
 				4FC6C7C424D49853004AD156 /* Person.swift in Sources */,

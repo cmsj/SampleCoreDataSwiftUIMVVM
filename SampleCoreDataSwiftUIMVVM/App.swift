@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import os.log
 
 @main
 struct SampleApp: App {
@@ -18,7 +19,7 @@ struct SampleApp: App {
             MainView().environment(\.managedObjectContext, dataManager.viewContext)
         }
         .onChange(of: scenePhase) { newValue in
-            print("scenePhase changed")
+            Logger.scene.info("scenePhase changed: \(String(describing: newValue), privacy: .public)")
             dataManager.save()
         }
     }

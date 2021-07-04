@@ -7,15 +7,20 @@
 
 import Foundation
 import CoreData
+import os.log
 
 public class CoreDataHelper {
     public static let shared = CoreDataHelper()
 
     private var containerDescription: NSPersistentStoreDescription
     public var persistentContainer: NSPersistentContainer
-    lazy public var context: NSManagedObjectContext = { persistentContainer.viewContext }()
+    lazy public var context: NSManagedObjectContext = {
+        Logger.dbHelper.info("Serving context")
+        return persistentContainer.viewContext
+    }()
 
     init(inMemory: Bool = false) {
+        Logger.dbHelper.info("Initialising with inMemory: \(inMemory, privacy: .public)")
         var containerName = "SampleCoreDataSwiftUIMVVM"
         containerDescription = NSPersistentStoreDescription()
 
@@ -27,11 +32,12 @@ public class CoreDataHelper {
             persistentContainer.persistentStoreDescriptions = [containerDescription]
         }
 
-        print("Loading database from: \(persistentContainer.persistentStoreDescriptions[0])")
+        Logger.dbHelper.info("Loading database: \(self.persistentContainer.persistentStoreDescriptions[0], privacy: .public)")
         persistentContainer.loadPersistentStores { _, error in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
+            Logger.dbHelper.info("Database loaded.")
         }
     }
 
