@@ -13,17 +13,22 @@ import os.log
 // MARK: - Core Data manager
 class DataManager: ObservableObject {
     static let shared = DataManager()
-    static let preview = DataManager(inMemory: false)
     let log = Logger.dataManager
     var dbHelper: CoreDataHelper
 
     lazy var viewContext: NSManagedObjectContext = { dbHelper.context }()
     init(inMemory: Bool = false) {
+        var inMemory = inMemory
+
+        // Forcibly override inMemory if we're in UI Testing or SwiftUI Preview, because we always want a fresh database each run
+        if ProcessInfo.processInfo.arguments.contains("UI-TESTING") || ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
+            inMemory = true
+        }
+
         log.info("Initialising with inMemory: \(inMemory)")
         dbHelper = CoreDataHelper(inMemory: inMemory)
 
-        if inMemory || ProcessInfo.processInfo.arguments.contains("UI-TESTING") || ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
-            // We're running in UI Testing or SwiftUI Previews - unconditionally restore some defaults
+        if inMemory {
             log.info("Detected some kind of non-production environment. Restoring defaults")
             restoreDefaults()
         }

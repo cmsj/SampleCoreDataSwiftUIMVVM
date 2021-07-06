@@ -12,22 +12,23 @@ import os.log
 public class CoreDataHelper {
     public static let shared = CoreDataHelper()
 
-    private var containerDescription: NSPersistentStoreDescription
     public var persistentContainer: NSPersistentContainer
+    private var containerDescription: NSPersistentStoreDescription
+
+    // This is done as a lazy var to avoid racing with the container initialisation. This seems like a poor choice.
     lazy public var context: NSManagedObjectContext = {
-        Logger.dbHelper.info("Serving context")
+        Logger.dbHelper.info("Vending context")
         return persistentContainer.viewContext
     }()
 
     init(inMemory: Bool = false) {
         Logger.dbHelper.info("Initialising with inMemory: \(inMemory, privacy: .public)")
-        var containerName = "SampleCoreDataSwiftUIMVVM"
+
+        // The name here should match your xcdatamodeld filename
+        persistentContainer = NSPersistentContainer(name: "SampleCoreDataSwiftUIMVVM")
+
         containerDescription = NSPersistentStoreDescription()
-
-        persistentContainer = NSPersistentContainer(name: containerName, managedObjectModel: NSManagedObjectModel.mergedModel(from: [Bundle(for: type(of: self))])!)
-
         if inMemory {
-            containerName = "TemporaryStore"
             containerDescription.url = URL(fileURLWithPath: "/dev/null")
             persistentContainer.persistentStoreDescriptions = [containerDescription]
         }
