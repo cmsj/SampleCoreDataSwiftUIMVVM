@@ -22,18 +22,13 @@ struct PeopleListView: View {
             }
             .onDelete { indexSet in
                 withAnimation {
-                    indexSet.map { people[$0] }.forEach(viewContext.delete)
+                    indexSet.map { people[$0] }.forEach(DataManager.shared.deletePerson)
                 }
             }
 
             Button("Add person...") {
                 withAnimation {
-                    let newPerson = Person(context: viewContext)
-                    newPerson.uuid = UUID()
-                    newPerson.name = "Newy Newerson"
-                    newPerson.isCEO = false
-                    newPerson.reason = .SummerVacation
-                    newPerson.days = Set(0..<7)
+                    DataManager.shared.addPerson(name: "Newy Newerson", ceo: false, visitReason: .SummerVacation, days: Set(0..<7))
                 }
             }
         }

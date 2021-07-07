@@ -11,7 +11,9 @@ import os.log
 extension Logger {
     private static var subsystem = Bundle.main.bundleIdentifier!
 
+    static let app = Logger(subsystem: subsystem, category: "appDelegate")
     static let dataManager = Logger(subsystem: subsystem, category: "dataManager")
     static let dbHelper = Logger(subsystem: subsystem, category: "dbHelper")
     static let scene = Logger(subsystem: subsystem, category: "Scene")
+    static let personEditor = Logger(subsystem: subsystem, category: "PersonEditor")
 }

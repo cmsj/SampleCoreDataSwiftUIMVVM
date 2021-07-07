@@ -6,9 +6,23 @@
 //
 
 import SwiftUI
+import Combine
+import os.log
 
 struct PersonEditor: View {
     @ObservedObject var person: Person
+    let personSubscriber: AnyCancellable?
+
+    init(person: Person) {
+        self.person = person
+
+        // For this view it's easiest to subscribe to the Person object for any changes made through the UI
+        self.personSubscriber = person.objectWillChange
+            .sink {
+                Logger.personEditor.trace("Person object changed, marking data manager dirty")
+                DataManager.shared.markDirty()
+            }
+    }
 
     var body: some View {
         List {

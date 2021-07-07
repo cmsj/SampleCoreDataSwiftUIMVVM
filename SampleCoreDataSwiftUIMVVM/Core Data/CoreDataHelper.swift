@@ -11,18 +11,19 @@ import os.log
 
 public class CoreDataHelper {
     public static let shared = CoreDataHelper()
+    let log = Logger.dbHelper
 
     public var persistentContainer: NSPersistentContainer
     private var containerDescription: NSPersistentStoreDescription
 
     // This is done as a lazy var to avoid racing with the container initialisation. This seems like a poor choice.
     lazy public var context: NSManagedObjectContext = {
-        Logger.dbHelper.info("Vending context")
+        log.trace("Vending context")
         return persistentContainer.viewContext
     }()
 
     init(inMemory: Bool = false) {
-        Logger.dbHelper.info("Initialising with inMemory: \(inMemory, privacy: .public)")
+        log.trace("Initialising with inMemory: \(inMemory, privacy: .public)")
 
         // The name here should match your xcdatamodeld filename
         persistentContainer = NSPersistentContainer(name: "SampleCoreDataSwiftUIMVVM")
@@ -34,24 +35,20 @@ public class CoreDataHelper {
             persistentContainer.persistentStoreDescriptions = [containerDescription]
         }
 
-        Logger.dbHelper.info("Loading database: \(self.persistentContainer.persistentStoreDescriptions[0], privacy: .public)")
+        log.info("Loading database: \(self.persistentContainer.persistentStoreDescriptions[0], privacy: .public)")
         persistentContainer.loadPersistentStores { _, error in
             if let error = error as NSError? {
                 // FIXME: Do something better with errors here
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
-            Logger.dbHelper.info("Database loaded.")
+            Logger.dbHelper.trace("Database loaded.")
         }
     }
 
     // MARK: -  DBHelper Protocol
     public func create(_ object: NSManagedObject) {
-        do {
-            try context.save()
-        } catch {
-            // FIXME: Do something better with errors here
-            fatalError("error saving context while creating an object: \(error)")
-        }
+        // We don't actually need to add/create anything here, the object will already be in the context, so just flush the changes
+        self.saveContext()
     }
 
     func fetch<T: NSManagedObject>(_ objectType: T.Type, predicate: NSPredicate? = nil, limit: Int? = nil, sortKey: String? = nil, sortAscending: Bool = true) -> Result<[T], Error> {
@@ -87,6 +84,7 @@ public class CoreDataHelper {
     // MARK: - Persistent store saver
     func saveContext () {
         if context.hasChanges {
+            log.trace("Saving")
             do {
                 try context.save()
             } catch {

@@ -15,6 +15,8 @@ class DataManager: ObservableObject {
     static let shared = DataManager()
     let log = Logger.dataManager
     var dbHelper: CoreDataHelper
+    
+    private var selfSubscriber: AnyCancellable? = nil
 
     lazy var viewContext: NSManagedObjectContext = { dbHelper.context }()
     init(inMemory: Bool = false) {
@@ -26,21 +28,33 @@ class DataManager: ObservableObject {
             inMemory = true
         }
 
-        log.info("Initialising with inMemory: \(inMemory)")
+        log.trace("Initialising with inMemory: \(inMemory)")
         dbHelper = CoreDataHelper(inMemory: inMemory)
 
         if inMemory {
-            log.info("Detected some kind of non-production environment. Restoring defaults")
+            log.notice("Detected some kind of non-production environment. Restoring defaults")
             restoreDefaults()
         }
 
         // Check if we have invalid data and if so, reset to defaults
         defaultsIfInvalid()
+        
+        // All changes made through the UI eventually end up here
+        selfSubscriber = objectWillChange
+            .debounce(for: 1.0, scheduler: RunLoop.main)
+            .sink {
+                self.save()
+            }
+    }
+    
+    func markDirty() {
+        log.trace("Marked dirty")
+        self.objectWillChange.send()
     }
 
     func fetchPeople(ceo: Bool) -> [Person] {
-        Logger.dataManager.info("fetchPeople with ceo: \(ceo)")
-        let predicate = NSPredicate(format: "isCEO == %@", NSNumber(value: ceo))
+        log.trace("fetchPeople with ceo: \(ceo)")
+        let predicate = NSPredicate(format: "isCEO == %@", ceo as NSNumber)
         let result: Result<[Person], Error> = dbHelper.fetch(Person.self, predicate: predicate, sortKey: "name")
         switch result {
         case .success(let people):
@@ -63,14 +77,21 @@ class DataManager: ObservableObject {
         self.objectWillChange.send()
         dbHelper.create(newPerson)
     }
-
+    
+    func deletePerson(_ person: Person) {
+        log.trace("Deleting \(person.name ?? "<UNKNOWN>")")
+        dbHelper.context.delete(person)
+        self.markDirty()
+    }
+    
     func deleteAll() {
+        log.trace("Deleting all Person objects")
         self.objectWillChange.send()
         dbHelper.deleteAll(Person.self)
     }
 
     func restoreDefaults() {
-        Logger.dataManager.info("Restoring defaults")
+        log.trace("Restoring defaults")
         deleteAll()
 
         addPerson(name: "Jonny Appleseed", ceo: true, visitReason: .Staff, days: Set(0..<7))
@@ -82,20 +103,17 @@ class DataManager: ObservableObject {
     }
 
     func defaultsIfInvalid() {
-        Logger.dataManager.info("Checking datastore validity")
+        log.info("Checking datastore validity")
         let ceo = fetchPeople(ceo: true)
 
         if ceo.count != 1 {
+            log.warning("Database invalid")
             deleteAll()
             restoreDefaults()
         }
     }
 
     func save() {
-        if dbHelper.context.hasChanges {
-            Logger.dataManager.info("Saving")
-            print("Saving!")
-            dbHelper.saveContext()
-        }
+        dbHelper.saveContext()
     }
 }
