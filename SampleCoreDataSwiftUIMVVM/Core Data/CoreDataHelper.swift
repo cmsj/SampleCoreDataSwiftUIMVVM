@@ -29,6 +29,7 @@ public class CoreDataHelper {
 
         containerDescription = NSPersistentStoreDescription()
         if inMemory {
+            // This is preferable to using containerDescription.type = NSInMemoryStoreType, because that type doesn't support batch operations
             containerDescription.url = URL(fileURLWithPath: "/dev/null")
             persistentContainer.persistentStoreDescriptions = [containerDescription]
         }
@@ -36,6 +37,7 @@ public class CoreDataHelper {
         Logger.dbHelper.info("Loading database: \(self.persistentContainer.persistentStoreDescriptions[0], privacy: .public)")
         persistentContainer.loadPersistentStores { _, error in
             if let error = error as NSError? {
+                // FIXME: Do something better with errors here
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
             Logger.dbHelper.info("Database loaded.")
@@ -47,6 +49,7 @@ public class CoreDataHelper {
         do {
             try context.save()
         } catch {
+            // FIXME: Do something better with errors here
             fatalError("error saving context while creating an object: \(error)")
         }
     }
@@ -76,6 +79,7 @@ public class CoreDataHelper {
             try context.executeAndMergeChanges(using: deleteRequest)
             return
         } catch {
+            // FIXME: Do something better with errors here. Maybe forcibly delete the database file?
             fatalError(error.localizedDescription)
         }
     }
@@ -87,6 +91,7 @@ public class CoreDataHelper {
                 try context.save()
             } catch {
                 let nserror = error as NSError
+                // FIXME: Do something better with errors here
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }

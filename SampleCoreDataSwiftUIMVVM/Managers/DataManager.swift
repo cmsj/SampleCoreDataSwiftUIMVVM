@@ -18,9 +18,10 @@ class DataManager: ObservableObject {
 
     lazy var viewContext: NSManagedObjectContext = { dbHelper.context }()
     init(inMemory: Bool = false) {
+        // function arguements are `let` but we want to be able to override inMemory, so make it a `var` instead
         var inMemory = inMemory
 
-        // Forcibly override inMemory if we're in UI Testing or SwiftUI Preview, because we always want a fresh database each run
+        // Forcibly override inMemory if we're in UI Testing or SwiftUI Preview, because we always want a fresh, temporary database each run
         if ProcessInfo.processInfo.arguments.contains("UI-TESTING") || ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
             inMemory = true
         }

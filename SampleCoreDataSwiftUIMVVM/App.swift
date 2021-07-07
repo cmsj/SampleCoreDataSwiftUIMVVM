@@ -19,6 +19,7 @@ struct SampleApp: App {
             MainView().environment(\.managedObjectContext, dataManager.viewContext)
         }
         .onChange(of: scenePhase) { newValue in
+            // Unconditionally save Core Data when we change scene phase (ie the user switches app or hides the app or something)
             Logger.scene.info("scenePhase changed: \(String(describing: newValue), privacy: .public)")
             dataManager.save()
         }
@@ -27,7 +28,8 @@ struct SampleApp: App {
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        // This is the first point where we fetch DataManager.shared and where it will therefore be instantiated
+
+        // NOTE: This is the first point where we fetch DataManager.shared and where it will therefore be instantiated
         let dataManager = DataManager.shared
 
         // Register for change notifications from Core Data so we can auto-save

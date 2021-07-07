@@ -15,8 +15,7 @@ struct PeopleListView: View {
     var body: some View {
         Section(header: Text("People"), footer: Text("Swipe to delete")) {
             ForEach(people) { person in
-                // In current Xcode 12 betas, NavigationLink() doesn't seem to consistently load destinations lazily
-                // so we're forcing it to, see NavigationLazyView.swift
+                // NavigationLink is not fully lazy, so we've implemented that ourselves. See NavigationLazyView.swift
                 NavigationLink(destination: NavigationLazyView(PersonEditor(person: person)), label: {
                     PersonListItem(person: person)
                 })

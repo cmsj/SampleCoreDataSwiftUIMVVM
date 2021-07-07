@@ -16,6 +16,7 @@ struct PersonEditor: View {
                 HStack {
                     Text("Name")
                     Spacer()
+                    // NOTE: This TextField() is using our Binding extension because bindings normally can't be optionals
                     TextField("", text: $person.name ?? "")
                 }
                 Picker(selection: $person.reason, label: Text("Visit reason")) {
