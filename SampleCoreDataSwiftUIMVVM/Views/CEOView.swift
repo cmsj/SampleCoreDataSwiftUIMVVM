@@ -12,7 +12,7 @@ struct CEOView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest var people: FetchedResults<Person>
 
-    // We have to manually construct the fetch request here because @FetchRequest() doesn't let you apply a result limit inline
+    // We have to manually construct the fetch request here because @FetchRequest() doesn't let you apply a fetch limit inline above
     init() {
         let request: NSFetchRequest<Person> = Person.fetchRequest()
         request.fetchLimit = 1
